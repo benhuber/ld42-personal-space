@@ -11,6 +11,7 @@ public class PersonMotor : MonoBehaviour
     GameObject[] nodes;
     public GameObject selectedNode;
     callbacktype callwhendone;
+    public GameObject GFX;
 
     public float speed = 1f;
     public float distThreshhold = .2f;
@@ -38,7 +39,10 @@ public class PersonMotor : MonoBehaviour
             }
             else selectedNode = nodes[i];
         }
-        rb.velocity = (selectedNode.transform.position - transform.position).normalized * speed;
+        Vector2 velocity = (selectedNode.transform.position - transform.position).normalized * speed;
+        rb.velocity = velocity;
+        float rot = Vector2.SignedAngle(Vector2.down, velocity);
+        GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(velocity.x, velocity.y, 0));
     }
 
     public void StartWalking (GameObject[] newnodes, callbacktype callback )
