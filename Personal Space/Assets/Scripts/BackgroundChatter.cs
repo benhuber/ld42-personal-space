@@ -7,23 +7,44 @@ using TMPro;
 public class BackgroundChatter : MonoBehaviour {
 
     public Transform localdisplay;
-    bool active = false;
+    float doneat;
     public Vector3 offset;
     AudioSource aud;
+    TextMeshProUGUI tmp;
+    float maxdist = 5f;
 
     private void Start()
     {
         aud = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        if (tmp != null)
+        {
+            float dist = Vector2.Distance(transform.position, PlayerStatus.thePlayer.transform.position);
+            float a = (maxdist - dist)/maxdist;
+            Color c = tmp.color;
+            c.a = a;
+            tmp.color = c;
+            aud.volume = a;
+        }
+    }
+
     public void Display(string text, Color color, float plusDuration, AudioClip clip)
     {
         Transform displayclone = Instantiate(localdisplay, transform.position + offset, transform.rotation ,this.transform);
-        TextMeshProUGUI tmp = displayclone.GetComponentInChildren<TextMeshProUGUI>();
+        tmp = displayclone.GetComponentInChildren<TextMeshProUGUI>();
         tmp.color = color;
         tmp.text = text;
+        aud.clip = clip;
+        aud.Play();
+        doneat = Time.time + clip.length + plusDuration;
+        Destroy(displayclone.gameObject, clip.length + plusDuration);
+    }
 
-
-        Destroy(displayclone, clip.length + plusDuration);
+    public bool AmIIdle()
+    {
+        return (Time.time > doneat);
     }
 }

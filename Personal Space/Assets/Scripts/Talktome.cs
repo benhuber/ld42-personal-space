@@ -27,7 +27,7 @@ public class Talktome : MonoBehaviour {
         keypressed = Input.GetKey(KeyCode.E);
     }
 
-    void FixedUpdate () {
+    public void FixedUpdate () {
         if (Time.fixedTime > doneuntill) done = false;
         if (done) return;
 
@@ -49,5 +49,35 @@ public class Talktome : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, talkradius);
     }
+
+    //Statemachiene
+
+    private struct State
+    {
+        // goto nodes[] path
+        bool walk;
+        // node[] nodes;
+        // talk to Person
+        bool talk;
+        // talktome[] partners;
+        // dance
+        bool dance;
+
+    }
+
+    private struct Statetransition
+    {
+        public State origin;
+        public State[] possibleFollowStates;
+        public Condition[][] transitionConditions;
+    }
+}
+
+public class Condition
+{
+    bool reachedDestination;
+    bool eventInterrupted;
+    bool finishedtalking;
+
 
 }
