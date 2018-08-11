@@ -17,9 +17,13 @@ public class Dialogbox : MonoBehaviour {
     public TextMeshProUGUI B_opA;
     public TextMeshProUGUI B_opB;
 
+    public Image Portrait;
+    public Sprite defaultimg;
+
     // Use this for initialization
     void Awake() {
         Dialogsystem = this;
+        this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,6 +40,8 @@ public class Dialogbox : MonoBehaviour {
 
     public void DisplayDialog()
     {
+        if (currentState.Avatar != null) Portrait.sprite = currentState.Avatar;
+        else Portrait.sprite = defaultimg;
         Title.text = currentState.Title;
         Message.text = currentState.Message;
         B_opA.text = currentState.optionA;
@@ -88,6 +94,7 @@ public class Dialogbox : MonoBehaviour {
         public float oA_changeval;
         public float oB_changeval;
         public bool end;
+        public Sprite Avatar;
         public delegate void callbacktype();
         public callbacktype callback;
     }

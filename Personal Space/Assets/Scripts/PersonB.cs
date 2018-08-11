@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PersonB : Talktome
 {
+    public Sprite Portrait;
 
     void Start()
     {
+        Dialog = Dialogbox.Dialogsystem.gameObject;
+
         Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true };
-        Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Title = "Art Dealer", Message = "Do you want to buy that picture?", optionA = "How much is it?", optionB = "what..no!", oA_changeval = 0f, oB_changeval = 0f, end = false };
-        Dialogbox.Dialogstate ds1 = new Dialogbox.Dialogstate { Title = "Art Dealer", Message = "500.000€", optionA = "Can we talk about sth else", optionB = "no bye,", oA_changeval = 0f, oB_changeval = 0f, end = false };
+        Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate {Avatar = Portrait, Title = "Art Dealer", Message = "Do you want to buy that picture?", optionA = "How much is it?", optionB = "what..no!", oA_changeval = 0f, oB_changeval = 0f, end = false };
+        Dialogbox.Dialogstate ds1 = new Dialogbox.Dialogstate {Avatar = Portrait, Title = "Art Dealer", Message = "500.000€", optionA = "Can we talk about sth else", optionB = "no bye,", oA_changeval = 0f, oB_changeval = 0f, end = false };
 
         Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = ds1, oB_followup = Dend };
         Dialogbox.Dialogtransition dt1 = new Dialogbox.Dialogtransition { origial = ds1, oA_followup = ds0, oB_followup = Dend };
