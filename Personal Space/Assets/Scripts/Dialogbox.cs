@@ -44,6 +44,8 @@ public class Dialogbox : MonoBehaviour {
 
     public void ChoseOption(bool opA)
     {
+
+
         if (opA) PlayerStatus.thePlayer.ChangeAnnoyance(currentState.oA_changeval);
         else PlayerStatus.thePlayer.ChangeAnnoyance(currentState.oB_changeval);
 
@@ -53,12 +55,14 @@ public class Dialogbox : MonoBehaviour {
             {
                 if (opA)
                 {
+                    if (t.oA_followup.callback != null) t.oA_followup.callback();
                     if (t.oA_followup.end) EndDialog();
                     else currentState = t.oA_followup;
                     DisplayDialog();
                 }
                 else
                 {
+                    if (t.oB_followup.callback != null) t.oB_followup.callback();
                     if (t.oB_followup.end) EndDialog();
                     else currentState = t.oB_followup;
                     DisplayDialog();
@@ -84,6 +88,8 @@ public class Dialogbox : MonoBehaviour {
         public float oA_changeval;
         public float oB_changeval;
         public bool end;
+        public delegate void callbacktype();
+        public callbacktype callback;
     }
 
     public struct Dialogtransition
