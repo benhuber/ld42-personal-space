@@ -58,6 +58,7 @@ public class PersonB : Talktome
 
     private void FixedUpdate()
     {
+        base.FixedUpdate();
         //BC
         if (bc.AmIIdle())
         {
@@ -65,6 +66,8 @@ public class PersonB : Talktome
             else col = Color.red;
             bc.Display("HOHOHOHOHOHO", col, 3f, hohoclip);
         }
+
+        
     }
 
 

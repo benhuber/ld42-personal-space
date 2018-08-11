@@ -27,7 +27,7 @@ public class Talktome : MonoBehaviour {
         keypressed = Input.GetKey(KeyCode.E);
     }
 
-    void FixedUpdate () {
+    public void FixedUpdate () {
         if (Time.fixedTime > doneuntill) done = false;
         if (done) return;
 
@@ -71,9 +71,6 @@ public class Talktome : MonoBehaviour {
         public State[] possibleFollowStates;
         public Condition[][] transitionConditions;
     }
-
-
-
 }
 
 public class Condition

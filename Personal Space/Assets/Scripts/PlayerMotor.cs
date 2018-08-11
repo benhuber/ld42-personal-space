@@ -23,5 +23,7 @@ public class PlayerMotor : MonoBehaviour {
     {
         Vector2 velocity = pc.direction * speed;
         rb.velocity = velocity;
+        rb.rotation = Vector2.SignedAngle(Vector2.up, velocity);
+
     }
 }

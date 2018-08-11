@@ -59,7 +59,7 @@ public class PersonMotor : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(selectedNode.transform.position, transform.position);
+        if(selectedNode != null) Gizmos.DrawLine(selectedNode.transform.position, transform.position);
     }
 
 
