@@ -12,6 +12,7 @@ public class Talktome : MonoBehaviour {
     public float resettime = 10f;
     bool keypressed;
 
+    [HideInInspector]
     public GameObject Dialog;
     public LayerMask Lplayer;
 
@@ -20,8 +21,6 @@ public class Talktome : MonoBehaviour {
 
     bool done = false;
     float doneuntill;
-    
-
 
     private void Update()
     {

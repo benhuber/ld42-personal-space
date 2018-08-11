@@ -17,9 +17,13 @@ public class Dialogbox : MonoBehaviour {
     public TextMeshProUGUI B_opA;
     public TextMeshProUGUI B_opB;
 
+    public Image Portrait;
+    public Sprite defaultimg;
+
     // Use this for initialization
     void Awake() {
         Dialogsystem = this;
+        this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,6 +40,8 @@ public class Dialogbox : MonoBehaviour {
 
     public void DisplayDialog()
     {
+        if (currentState.Avatar != null) Portrait.sprite = currentState.Avatar;
+        else Portrait.sprite = defaultimg;
         Title.text = currentState.Title;
         Message.text = currentState.Message;
         B_opA.text = currentState.optionA;
@@ -44,6 +50,8 @@ public class Dialogbox : MonoBehaviour {
 
     public void ChoseOption(bool opA)
     {
+
+
         if (opA) PlayerStatus.thePlayer.ChangeAnnoyance(currentState.oA_changeval);
         else PlayerStatus.thePlayer.ChangeAnnoyance(currentState.oB_changeval);
 
@@ -53,12 +61,14 @@ public class Dialogbox : MonoBehaviour {
             {
                 if (opA)
                 {
+                    if (t.oA_followup.callback != null) t.oA_followup.callback();
                     if (t.oA_followup.end) EndDialog();
                     else currentState = t.oA_followup;
                     DisplayDialog();
                 }
                 else
                 {
+                    if (t.oB_followup.callback != null) t.oB_followup.callback();
                     if (t.oB_followup.end) EndDialog();
                     else currentState = t.oB_followup;
                     DisplayDialog();
@@ -84,6 +94,9 @@ public class Dialogbox : MonoBehaviour {
         public float oA_changeval;
         public float oB_changeval;
         public bool end;
+        public Sprite Avatar;
+        public delegate void callbacktype();
+        public callbacktype callback;
     }
 
     public struct Dialogtransition
