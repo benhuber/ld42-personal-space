@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour {
 
+    public static PlayerStatus thePlayer;
+
     [SerializeField]
     private float annoyance = 0f;
 
@@ -15,7 +17,12 @@ public class PlayerStatus : MonoBehaviour {
 
     private float calmSince;
 
-	void FixedUpdate () {
+    private void Awake()
+    {
+        thePlayer = this;
+    }
+
+    void FixedUpdate () {
         CheckArea();
 	}
 

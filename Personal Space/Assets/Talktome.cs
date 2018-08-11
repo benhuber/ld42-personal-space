@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Talktome : MonoBehaviour {
 
+    public Dialogbox.Dialogstate[] ds;
+    public Dialogbox.Dialogtransition[] dt;
+
+
     public GameObject Dialog;
     public LayerMask Lplayer;
 
@@ -12,17 +16,14 @@ public class Talktome : MonoBehaviour {
 
     bool done = false;
 
-	void Start () {
-		
-	}
-
+	
     void FixedUpdate () {
         if (done) return;
         Collider2D player = Physics2D.OverlapCircle(transform.position, talkradius, Lplayer);
         if (player != null)
         {
             Dialog.SetActive(true);
-            Dialogbox.Dialogsystem.StartDialog();
+            Dialogbox.Dialogsystem.StartDialog(ds, dt);
             done = true;
         }
 	}
