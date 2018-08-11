@@ -5,9 +5,14 @@ using UnityEngine;
 public class PersonB : Talktome
 {
     public Sprite Portrait;
+    BackgroundChatter bc;
+    Color col;
+    public AudioClip hohoclip;
+
 
     void Start()
     {
+        bc = GetComponent<BackgroundChatter>();
         Dialog = Dialogbox.Dialogsystem.gameObject;
 
         Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true };
@@ -23,5 +28,17 @@ public class PersonB : Talktome
         dt = new Dialogbox.Dialogtransition[2];
         dt[0] = dt0;
         dt[1] = dt1;
+    }
+
+    private void FixedUpdate()
+    {
+        
+        if (bc.AmIIdle())
+        {
+            if (col == Color.red) col = Color.green;
+            else col = Color.red;
+            bc.Display("HOHOHOHOHOHO", col, 3f, hohoclip);
+        }
+        
     }
 }
