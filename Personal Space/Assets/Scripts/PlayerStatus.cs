@@ -8,7 +8,7 @@ public class PlayerStatus : MonoBehaviour {
     public static PlayerStatus thePlayer;
 
     [SerializeField]
-    private float annoyance = 0f;
+    public float annoyance = 0f;
 
     public float radius = 3f;
     public LayerMask people;
