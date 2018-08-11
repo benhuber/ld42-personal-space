@@ -50,4 +50,37 @@ public class Talktome : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, talkradius);
     }
 
+    //Statemachiene
+
+    private struct State
+    {
+        // goto nodes[] path
+        bool walk;
+        // node[] nodes;
+        // talk to Person
+        bool talk;
+        // talktome[] partners;
+        // dance
+        bool dance;
+
+    }
+
+    private struct Statetransition
+    {
+        public State origin;
+        public State[] possibleFollowStates;
+        public Condition[][] transitionConditions;
+    }
+
+
+
+}
+
+public class Condition
+{
+    bool reachedDestination;
+    bool eventInterrupted;
+    bool finishedtalking;
+
+
 }
