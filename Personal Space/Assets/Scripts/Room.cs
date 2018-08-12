@@ -10,7 +10,7 @@ public class Room : MonoBehaviour {
 
     Vector2 debugpos;
 
-    private void Start()
+    private void Awake()
     {
         area = new Rect(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.localScale.x, transform.localScale.y));
     }

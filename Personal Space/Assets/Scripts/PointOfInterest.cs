@@ -13,6 +13,15 @@ public class PointOfInterest : MonoBehaviour {
     }
 
     public List<string> tags = new List<string>();
+    [HideInInspector]
+    public Room myRoom;
+
+    private void Start() {
+        myRoom = PathManager.manager.GetMyRoom(this.transform.position);
+        if (myRoom == null) {
+            Debug.LogError("Point of Interest outside of all rooms!");
+        }
+    }
 
     private void Awake() {
         poi.Add(this);
