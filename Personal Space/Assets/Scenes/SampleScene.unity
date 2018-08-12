@@ -16746,7 +16746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb33a83e55e6249b6bcd1f1b8456ea3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVignette: 2
+  maxVignette: 3
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33006,6 +33006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bc7454d4db58844a6dce31a403b8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  devmode: 1
   annoyance: 0
   radius: 2
   people:
