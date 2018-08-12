@@ -22,7 +22,6 @@ public class Room : MonoBehaviour {
         Gizmos.DrawLine(area.position, area.position+new Vector2(0, area.height));
         Gizmos.DrawLine(area.position + new Vector2(area.width, area.height), area.position + new Vector2(area.width, 0));
         Gizmos.DrawLine(area.position + new Vector2(area.width, area.height), area.position + new Vector2(0, area.height));
-        Gizmos.DrawSphere(new Vector3(debugpos.x, debugpos.y, 0), 2f);
     }
 
     public bool Contains (Vector2 pos)
