@@ -8,4 +8,9 @@ public class RoomTransition : MonoBehaviour {
     public Room RoomB;
     public List<GameObject> nodes = new List<GameObject>();
 
+    private void Awake()
+    {
+        nodes.Add(this.gameObject);
+    }
+
 }
