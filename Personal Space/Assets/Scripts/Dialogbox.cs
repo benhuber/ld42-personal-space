@@ -46,6 +46,10 @@ public class Dialogbox : MonoBehaviour {
         Message.text = currentState.Message;
         B_opA.text = currentState.optionA;
         B_opB.text = currentState.optionB;
+        B_opA.transform.parent.gameObject.SetActive(currentState.optionA != "");
+        B_opB.transform.parent.gameObject.SetActive(currentState.optionB != "");
+
+
     }
 
     public void ChoseOption(bool opA)

@@ -6,7 +6,7 @@ public class PersonA : Talktome
 {
     public Sprite Portrait;
 
-    void Start()
+    new void Start()
     {
         Dialog = Dialogbox.Dialogsystem.gameObject;
 
