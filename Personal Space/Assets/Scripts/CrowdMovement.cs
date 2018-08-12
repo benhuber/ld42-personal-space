@@ -11,6 +11,7 @@ public class CrowdMovement : MonoBehaviour {
     public float maxAvoidTime = -1f;
     public float talkAfinity = -1f;
     public float danceAfinity = -1f;
+    public bool dontLeaveTheRoom = false;
 
     enum State {
         WAITING, TALKING, TALKING_AND_WALKING, WALKING, WALKING_TO_DANCEFLOOR, DANCING
@@ -43,13 +44,14 @@ public class CrowdMovement : MonoBehaviour {
         if (maxWaitTime < 0) maxWaitTime = Random.Range(3f, 20f);
         if (maxAvoidTime < 0) maxAvoidTime = Random.Range(1f,10f);
         if (talkAfinity < 0) talkAfinity = Random.Range(0f, 1f);
-        if (danceAfinity < 0) danceAfinity = Random.Range(0f, .5f);
+        if (danceAfinity < 0) danceAfinity = Random.Range(0f, .25f);
         
         rb = GetComponent<Rigidbody2D>();
         GFX = transform.Find("GFX").gameObject;
     }
 
     Collider2D[] lastCollision = new Collider2D[0];
+    float stuckSince = float.PositiveInfinity;
 
     private void FixedUpdate() {
         myTime += Time.fixedDeltaTime;
@@ -99,9 +101,21 @@ public class CrowdMovement : MonoBehaviour {
                     rb.velocity = (danceTarget - transform.position).normalized * walkSpeed * 2.5f;
                 }
                 bool beat1 = (myTime % 1) < 0.5;
-                GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(beat1?0.2f:-.2f, -1, 0));
-                // wiggle in beat of music? all synchronously!
+                GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(1, beat1?0.2f:-.2f, 0));
                 break;
+        }
+
+        if (currentState == State.WALKING || currentState == State.WALKING_TO_DANCEFLOOR) {
+            if (rb.velocity.magnitude < 0.1f) {
+                stuckSince = Mathf.Min(stuckSince, myTime);
+                if (stuckSince + 1f < myTime) {
+                    Wait();
+                }
+            } else {
+                stuckSince = float.PositiveInfinity;
+            }
+        } else {
+            stuckSince = float.PositiveInfinity;
         }
 
         if (currentState == State.WALKING || currentState == State.WALKING_TO_DANCEFLOOR) {
@@ -143,6 +157,12 @@ public class CrowdMovement : MonoBehaviour {
     void ChangeState() {
         switch (currentState) {
             case State.WAITING:
+                if (dontLeaveTheRoom) {
+                    targetPosition = PathManager.manager.GetMyRoom(transform.position).RandomPoint();
+                    currentState = State.WALKING;
+                    nextStateChange = float.PositiveInfinity;
+                    break;
+                }
                 if (Random.Range(0f,1f) < danceAfinity) {
                     // go dancing
                     FindPathTo(PointOfInterest.GetPoIWithTag("dancefloor")[0]);

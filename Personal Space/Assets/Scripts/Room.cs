@@ -30,4 +30,8 @@ public class Room : MonoBehaviour {
         return (area.Contains(pos));
     }
 
+    public Vector3 RandomPoint() {
+        return new Vector3(area.position.x + Random.Range(0f,1f) * area.width, area.position.y + Random.Range(0f,1f) * area.height, 0);
+    }
+
 }
