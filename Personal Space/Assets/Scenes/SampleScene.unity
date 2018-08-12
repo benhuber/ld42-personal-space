@@ -365,7 +365,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: '*Smile*'
+  m_text: '*Smile*
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -429,12 +431,12 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 12.598755, w: 0}
   m_textInfo:
     textComponent: {fileID: 111211489}
-    characterCount: 7
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 0
+    spaceCount: 1
     wordCount: 1
     linkCount: 0
     lineCount: 1
@@ -38482,8 +38484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 554, y: -263}
-  m_SizeDelta: {x: 287.35, y: 25}
+  m_AnchoredPosition: {x: 554, y: -226}
+  m_SizeDelta: {x: 350, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &400306667
 MonoBehaviour:
@@ -39388,7 +39390,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 10.499023, w: 0}
   m_textInfo:
     textComponent: {fileID: 690370937}
     characterCount: 9
@@ -40177,6 +40179,7 @@ GameObject:
   - component: {fileID: 984282467}
   - component: {fileID: 984282468}
   - component: {fileID: 984282470}
+  - component: {fileID: 984282463}
   m_Layer: 8
   m_Name: Person B
   m_TagString: Untagged
@@ -40198,6 +40201,18 @@ Transform:
   m_Father: {fileID: 2123414881}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &984282463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 984282461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e426e217fa1ea1c428ee12b358326975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0.3
 --- !u!50 &984282464
 Rigidbody2D:
   serializedVersion: 4
@@ -40677,6 +40692,7 @@ GameObject:
   - component: {fileID: 1061684747}
   - component: {fileID: 1061684746}
   - component: {fileID: 1061684750}
+  - component: {fileID: 1061684751}
   m_Layer: 8
   m_Name: Person old
   m_TagString: Untagged
@@ -40819,6 +40835,18 @@ MonoBehaviour:
     m_Bits: 512
   talkradius: 2
   Portrait: {fileID: 21300000, guid: a31c55b32fdc8d1458ef0ad2785c9189, type: 3}
+--- !u!114 &1061684751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1061684744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e426e217fa1ea1c428ee12b358326975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
 --- !u!1001 &1125747423
 Prefab:
   m_ObjectHideFlags: 0
@@ -41354,8 +41382,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 113, y: -263}
-  m_SizeDelta: {x: 287.35, y: 25}
+  m_AnchoredPosition: {x: 113, y: -226}
+  m_SizeDelta: {x: 350, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1472987174
 MonoBehaviour:
@@ -42929,6 +42957,7 @@ GameObject:
   - component: {fileID: 2107836030}
   - component: {fileID: 2107836029}
   - component: {fileID: 2107836028}
+  - component: {fileID: 2107836035}
   m_Layer: 8
   m_Name: Person Safe
   m_TagString: Untagged
@@ -43176,6 +43205,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2107836035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2107836026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e426e217fa1ea1c428ee12b358326975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
 --- !u!1 &2123414880
 GameObject:
   m_ObjectHideFlags: 0
