@@ -17,6 +17,9 @@ public class PlayerStatus : MonoBehaviour {
 
     private float calmSince;
 
+    //flags 
+    public bool foundCake = false;
+
     private void Awake()
     {
         thePlayer = this;
@@ -32,7 +35,9 @@ public class PlayerStatus : MonoBehaviour {
         Collider2D[] areaPeople = Physics2D.OverlapCircleAll(transform.position, radius, people);
         foreach(Collider2D p in areaPeople)
         {
-            annoyance += Vector2.Distance(p.transform.position, transform.position);
+            Annoying a = p.GetComponent<Annoying>();
+            if (a == null) continue;
+            annoyance += Vector2.Distance(p.transform.position, transform.position)*a.value;
             calmSince = Time.time;
         }
 
