@@ -35,7 +35,7 @@ public class PersonSafe : Talktome {
         else if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Stress)
         {
             Dialogbox.Dialogstate Dend_fin = new Dialogbox.Dialogstate { end = true, callback = EndingManager.em.PlayEnd };
-            Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Darya", Message = "Hey! I'm here. I'm here. Come on, let's get out of here.", optionA = " Thanks", optionB = "...", oA_changeval = 0f, oB_changeval = 0f, end = false };
+            Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Darya", Message = "Hey! I'm here. I'm here. Come on, let's get out of here.", optionA = " Thanks", optionB = "", oA_changeval = 0f, oB_changeval = 0f, end = false };
             Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend_fin, oB_followup = Dend };
             ds = new Dialogbox.Dialogstate[3];
             ds[0] = ds0;
@@ -59,7 +59,7 @@ public class PersonSafe : Talktome {
         else if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Default)
         {
             Dialogbox.Dialogstate Dend_fin = new Dialogbox.Dialogstate { end = true, callback = EndingManager.em.PlayEnd };
-            Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Darya", Message = "So, how do you like the party?", optionA = "I don't know. I didn't feel like coming here in the first place. It's so crowded. Let's leave!", optionB = "The party might be fun after all. I think I want to hang out a bit longer", oA_changeval = 0f, oB_changeval = 0f, end = false };
+            Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Darya", Message = "So, how do you like the party?", optionA = "I don't know. I didn't feel like coming here in the first place. It's so crowded. Let's leave!", optionB = "The party might be fun after all. I think I want to hang out a bit longer.\n ", oA_changeval = 0f, oB_changeval = 0f, end = false };
             Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend_fin, oB_followup = Dend };
             ds = new Dialogbox.Dialogstate[3];
             ds[0] = ds0;
