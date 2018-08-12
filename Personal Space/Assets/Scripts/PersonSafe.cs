@@ -9,6 +9,12 @@ public class PersonSafe : Talktome {
 
     PLACEHOLDER_DATA.Endings oldending;
 
+    public static PersonSafe safe;
+
+    void Awake()
+    {
+        safe = this;
+    }
 
     new void Start()
     {
@@ -77,6 +83,13 @@ public class PersonSafe : Talktome {
 
         if (oldending != PLACEHOLDER_DATA.data.ending) NextBehavior();
         oldending = PLACEHOLDER_DATA.data.ending;
+    }
+
+    public void TriggerEnd()
+    {
+        NextBehavior();
+        Dialog.SetActive(true);
+        Dialogbox.Dialogsystem.StartDialog(ds, dt);
     }
 
 
