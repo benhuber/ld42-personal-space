@@ -6,7 +6,7 @@ using System.Linq;
 public class PathManager : MonoBehaviour {
 
     public Room[] Rooms;
-    public RoomTransition[] Transitions;
+    public RoomTransition[] transitions;
 
 
     public static PathManager manager;
@@ -26,7 +26,7 @@ public class PathManager : MonoBehaviour {
 
     public List<Vector3> GetRoomTransition(Room A, Room B)
     {
-        foreach (RoomTransition rt in Transitions)
+        foreach (RoomTransition rt in transitions)
         {
             if (rt.RoomA == A && rt.RoomB == B) {
                 return TransitionToPositions(rt, false);
@@ -58,6 +58,13 @@ public class PathManager : MonoBehaviour {
 
     public List<Vector3> GetPathFromAToB(Room A, Room B)
     {
+        int tCount = transitions.Length;
+        for (int i=0; i<tCount-1; ++i) {
+            var tmp = transitions[i];
+            int idx = Random.Range(i+1,tCount);
+            transitions[i] = transitions[idx];
+            transitions[idx] = tmp;
+        }
         return FindPath(A, B, new List<Vector3>(), new List<Room>(){A});
     }
     public List<Vector3> GetPathFromAToB(string nameA, string nameB)
@@ -77,7 +84,7 @@ public class PathManager : MonoBehaviour {
             return pathSoFar;
         }
 
-        foreach(RoomTransition rt in Transitions)
+        foreach(RoomTransition rt in transitions)
         {
             if (rt.RoomA == A && !roomsSoFar.Contains(rt.RoomB)) {
                 int oldPathLength = pathSoFar.Count;

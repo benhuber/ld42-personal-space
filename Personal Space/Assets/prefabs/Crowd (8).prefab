@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 82613090357586552}
   - component: {fileID: 114059548823929268}
   - component: {fileID: 114920760429017162}
+  - component: {fileID: 114138825885225212}
   m_Layer: 8
   m_Name: Crowd (8)
   m_TagString: Untagged
@@ -55,8 +56,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085414001065288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.355574, y: 8.506712, z: 0.2890625}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: -11.930012, y: 2.9049969, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4880937164092772}
   m_Father: {fileID: 0}
@@ -220,6 +221,20 @@ MonoBehaviour:
     type: 2}
   offset: {x: 0, y: 0, z: 0}
   maxdist: 10
+--- !u!114 &114138825885225212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085414001065288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e426e217fa1ea1c428ee12b358326975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 212893040494352502}
+  value: -1
+  setColorBasedOnValue: 1
 --- !u!114 &114920760429017162
 MonoBehaviour:
   m_ObjectHideFlags: 1
