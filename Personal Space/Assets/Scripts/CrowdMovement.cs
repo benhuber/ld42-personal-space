@@ -113,7 +113,7 @@ public class CrowdMovement : MonoBehaviour {
                 if (c.gameObject == this.gameObject) continue;
                 var directionToPerson = (c.transform.position - transform.position).normalized;
                 float distance = (c.transform.position - transform.position).magnitude - 1f;
-                float intensity = (personalSpaceRadius - distance) * (annoyance + 1);
+                float intensity = (personalSpaceRadius - distance) * 2f / (annoyance + 1);
                 // Debug.Log(distance + " " + annoyance);
                 float dotP = Vector3.Dot(direction, directionToPerson);
                 if (dotP < 0) continue;
@@ -135,6 +135,7 @@ public class CrowdMovement : MonoBehaviour {
             annoyance *= 0.9f;
             rb.velocity *= 0.3f;
         }
+        rb.mass = 1f + annoyance;
     }
 
 
