@@ -17,7 +17,6 @@ public class Person : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         idled = Random.Range(0.1f, idleTime);
-
     }
 	
 	void FixedUpdate () {

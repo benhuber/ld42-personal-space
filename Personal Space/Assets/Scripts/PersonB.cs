@@ -11,14 +11,14 @@ public class PersonB : Talktome
     Color col;
     public AudioClip hohoclip;
     //PATHFINDING
-    public GameObject[] PathA;
-    public GameObject[] PathB;
-    public GameObject[] PathC;
-    public GameObject[] PathD;
-    public GameObject[] PathE;
+    public Transform[] PathA;
+    public Transform[] PathB;
+    public Transform[] PathC;
+    public Transform[] PathD;
+    public Transform[] PathE;
     PersonMotor pm;
 
-    public List<GameObject[]> PATHS = new List<GameObject[]>();
+    public List<Transform[]> PATHS = new List<Transform[]>();
     int i = 0;
 
     void Start()
