@@ -28008,6 +28008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ending: 0
+  numberOfFriendsSpokenTo: 0
 --- !u!1 &1200364876
 GameObject:
   m_ObjectHideFlags: 0
@@ -28886,6 +28887,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239770bbd08487f4ea54e4986c022372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Rtext: {fileID: 145414156}
+  text: {fileID: 145414157}
+  waittime: 4
+  Debug: 0
+  speed: 15
 --- !u!1 &1329161771
 GameObject:
   m_ObjectHideFlags: 0

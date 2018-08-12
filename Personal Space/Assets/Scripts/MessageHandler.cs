@@ -22,6 +22,9 @@ public class MessageHandler : MonoBehaviour {
 
     public static MessageHandler me;
 
+    public float speed = 3f;
+
+
     private void Awake()
     {
         me = this;
@@ -38,13 +41,13 @@ public class MessageHandler : MonoBehaviour {
 
         if (coming)
         {
-            if (Rtext.transform.position.x >= 1000f)
+            if (Rtext.transform.position.x >= 900f)
             {
                 coming = false;
                 waiting = true;
                 waituntill = Time.time + waittime;
             }
-            else Rtext.transform.position += new Vector3(1f, 0, 0);
+            else Rtext.transform.position += new Vector3(1f*speed, 0, 0);
         }
         if (waiting && Time.time > waituntill)
         {
@@ -59,6 +62,7 @@ public class MessageHandler : MonoBehaviour {
                 Rtext.transform.position = originalPos;
                 TryNext();
             }
+            else Rtext.transform.position += new Vector3(1f * speed, 0, 0);
         }
 
     }
