@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 50830520183644406}
   - component: {fileID: 82613090357586552}
   - component: {fileID: 114059548823929268}
-  - component: {fileID: 114822550929641166}
   - component: {fileID: 114920760429017162}
   m_Layer: 8
   m_Name: Crowd (8)
@@ -56,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085414001065288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.002684, y: -10.234067, z: 0.2890625}
+  m_LocalPosition: {x: 37.893394, y: -2.1784701, z: 0.2890625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4880937164092772}
@@ -220,22 +219,7 @@ MonoBehaviour:
   localdisplay: {fileID: 224111668302216074, guid: 7aec131b122ef9b4ea80386883d010d3,
     type: 2}
   offset: {x: 0, y: 0, z: 0}
---- !u!114 &114822550929641166
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1085414001065288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4769ab18011874fb07f5a56504ece8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedNode: {fileID: 0}
-  GFX: {fileID: 1724422519930448}
-  speed: 1
-  distThreshhold: 0.2
-  walking: 0
+  maxdist: 10
 --- !u!114 &114920760429017162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,9 +237,10 @@ MonoBehaviour:
   maxAvoidTime: -1
   talkAfinity: -1
   danceAfinity: -1
-  crowdLayer:
+  peopleLayer:
     serializedVersion: 2
     m_Bits: 256
+  walkSpeed: 1
 --- !u!212 &212853202678145332
 SpriteRenderer:
   m_ObjectHideFlags: 1
