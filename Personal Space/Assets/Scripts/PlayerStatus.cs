@@ -7,7 +7,7 @@ public class PlayerStatus : MonoBehaviour {
 
     public static PlayerStatus thePlayer;
 
-    [SerializeField]
+    [SerializeField][Range(0f, 300f)]
     public float annoyance = 0f;
 
     public float radius = 3f;
@@ -37,14 +37,14 @@ public class PlayerStatus : MonoBehaviour {
         {
             Annoying a = p.GetComponent<Annoying>();
             if (a == null) continue;
-            annoyance += Vector2.Distance(p.transform.position, transform.position)*a.value;
+            ChangeAnnoyance((radius-Vector2.Distance(p.transform.position, transform.position))*a.value);
             calmSince = Time.time;
         }
 
         if (annoyance > 1) {
-            if (calmSince + 4f < Time.time) annoyance -= .6f;
-            else if (calmSince + 2f < Time.time) annoyance -= .4f;
-            else if (calmSince + 1f < Time.time) annoyance -= .2f;
+            if (calmSince + 4f < Time.time) ChangeAnnoyance(.6f);
+            else if (calmSince + 2f < Time.time) ChangeAnnoyance(.4f);
+            else if (calmSince + 1f < Time.time) ChangeAnnoyance(.2f);
         }
         
         Sannoyance.value = annoyance;
@@ -54,6 +54,8 @@ public class PlayerStatus : MonoBehaviour {
     public void ChangeAnnoyance (float ann)
     {
         annoyance += ann;
+        if (annoyance > 300) annoyance = 300;
+        if (annoyance < 0) annoyance = 0;
     }
 
     private void OnDrawGizmos()
