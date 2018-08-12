@@ -30,15 +30,15 @@ public class CrowdMovement : MonoBehaviour {
     float myTime = 0f;
 
     public LayerMask peopleLayer;
-    public float walkSpeed = 1f;
+    public float walkSpeed = 2f;
 
     Rigidbody2D rb;
     GameObject GFX;
 
     private void Start() {
         // replace all negative values by random values
-        if (personalSpaceRadius < 0) personalSpaceRadius = Random.Range(.5f,1.5f);
-        if (initTalkRadius < 0) initTalkRadius = Random.Range(0.5f, 2f);
+        if (personalSpaceRadius < 0) personalSpaceRadius = Random.Range(1f,3f);
+        if (initTalkRadius < 0) initTalkRadius = Random.Range(1f, 4f);
         if (maxWaitTime < 0) maxWaitTime = Random.Range(3f, 20f);
         if (maxAvoidTime < 0) maxAvoidTime = Random.Range(1f,10f);
         if (talkAfinity < 0) talkAfinity = Random.Range(0f, 1f);
@@ -91,7 +91,7 @@ public class CrowdMovement : MonoBehaviour {
                 break;
             case State.DANCING:
                 if (myTime > nextDanceStep) {
-                    danceTarget = targetPosition + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f,3f), 0f);
+                    danceTarget = targetPosition + new Vector3(Random.Range(-5f, 5f), Random.Range(-5f,5f), 0f);
                     nextDanceStep = myTime + 2f;
                 }
                 if ((transform.position - danceTarget).magnitude > Time.fixedDeltaTime * walkSpeed * 2.5f) {
@@ -111,10 +111,12 @@ public class CrowdMovement : MonoBehaviour {
             foreach (var c in personalSpaceColliders) {
                 if (c.gameObject == this.gameObject) continue;
                 var directionToPerson = (c.transform.position - transform.position).normalized;
-                float distance = (c.transform.position - transform.position).magnitude - .5f;
+                float distance = (c.transform.position - transform.position).magnitude - 1f;
                 float intensity = (personalSpaceRadius - distance) * (annoyance + 1);
-                Debug.Log(distance + " " + annoyance);
-                var commonComponent = Vector3.Dot(direction, directionToPerson) * directionToPerson;
+                // Debug.Log(distance + " " + annoyance);
+                float dotP = Vector3.Dot(direction, directionToPerson);
+                if (dotP < 0) continue;
+                var commonComponent = dotP * directionToPerson;
                 var normal = direction - commonComponent;
                 normal.Normalize();
                 if (commonComponent.magnitude > 0.95f) {
@@ -156,9 +158,9 @@ public class CrowdMovement : MonoBehaviour {
                 }
                 break;
             case State.TALKING:
-                Debug.Log("check for personal space distance");
+                // Debug.Log("check for personal space distance");
                 if (Mathf.Abs((transform.position - talkPartner.position).magnitude - personalSpaceRadius) > 0.1f) {
-                    targetPosition = (transform.position - talkPartner.position).normalized * (personalSpaceRadius+.5f) + talkPartner.position;
+                    targetPosition = (transform.position - talkPartner.position).normalized * (personalSpaceRadius+1f) + talkPartner.position;
                     currentState = State.TALKING_AND_WALKING;
                     nextStateChange = myTime + 3f;
                 } else {
@@ -204,7 +206,7 @@ public class CrowdMovement : MonoBehaviour {
                 currentState = State.TALKING;
                 ChangeState(); // to update the targetPosition for talk&walk
                 otherCrowd.GetSpokenTo(duration, this.transform);
-                Debug.Log("started to talk!");
+                // Debug.Log("started to talk!");
                 return true;
             }
         }
