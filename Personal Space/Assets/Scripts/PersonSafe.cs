@@ -10,8 +10,9 @@ public class PersonSafe : Talktome {
     PLACEHOLDER_DATA.Endings oldending;
 
 
-    void Start()
+    new void Start()
     {
+        base.Start();
         //DIALOG
         Dialog = Dialogbox.Dialogsystem.gameObject;
         NextBehavior();

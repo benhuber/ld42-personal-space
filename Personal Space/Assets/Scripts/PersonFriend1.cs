@@ -20,8 +20,9 @@ public class PersonFriend1 : Talktome {
 
     Annoying annoy;
 
-    void Start()
+    new void Start()
     {
+        base.Start();
         //BC
         bc = GetComponent<BackgroundChatter>();
         col = Color.blue;

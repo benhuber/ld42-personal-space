@@ -21,8 +21,9 @@ public class PersonB : Talktome
     public List<Transform[]> PATHS = new List<Transform[]>();
     int i = 0;
 
-    void Start()
+    new void Start()
     {
+        base.Start();
         //BC
         bc = GetComponent<BackgroundChatter>();
         //DIALOG
