@@ -92,7 +92,7 @@ public class CrowdMovement : MonoBehaviour {
                 break;
             case State.DANCING:
                 if (myTime > nextDanceStep) {
-                    danceTarget = targetPosition + new Vector3(Random.Range(-5f, 5f), Random.Range(-5f,5f), 0f);
+                    danceTarget = targetPosition + new Vector3(Random.Range(-7f, 7f), Random.Range(-7f,7f), 0f);
                     nextDanceStep = myTime + 2f;
                 }
                 if ((transform.position - danceTarget).magnitude > Time.fixedDeltaTime * walkSpeed * 2.5f) {
@@ -135,7 +135,7 @@ public class CrowdMovement : MonoBehaviour {
             annoyance *= 0.9f;
             rb.velocity *= 0.3f;
         }
-        rb.mass = 1f + annoyance;
+        rb.mass = .1f + annoyance/10f;
     }
 
 
@@ -150,9 +150,9 @@ public class CrowdMovement : MonoBehaviour {
                     nextStateChange = float.PositiveInfinity;
                 } else {
                     // pick point of interest and go there
-                    // TODO pathfinding
                     var pois = PointOfInterest.poi.Where(x => !x.tags.Contains("dancefloor")).ToList();
-                    FindPathTo(pois[Random.Range(0, pois.Count)]);
+                    pois.OrderBy(x => x.transform.position - transform.position);
+                    FindPathTo(pois[Random.Range(0, Mathf.Min(pois.Count, 3))]);
                     currentState = State.WALKING;
                     nextStateChange = float.PositiveInfinity;
                 }
@@ -209,7 +209,7 @@ public class CrowdMovement : MonoBehaviour {
     }
 
     bool CheckWalkingDone() {
-        if ((transform.position - targetPosition).magnitude < .5f) {
+        if ((transform.position - targetPosition).magnitude < 1f) {
             if (walkPath.Count == 0) {
                 return true;
             }
