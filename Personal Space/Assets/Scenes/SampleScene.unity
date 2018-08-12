@@ -27466,12 +27466,9 @@ Prefab:
       propertyPath: m_Name
       value: Dancer
       objectReference: {fileID: 0}
-    - target: {fileID: 4344396500226364, guid: 0436a64d893bf4fd5aac700a476e25c5, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4344396500226364, guid: 0436a64d893bf4fd5aac700a476e25c5, type: 2}
-      propertyPath: m_LocalScale.y
+    - target: {fileID: 114920760429017162, guid: 0436a64d893bf4fd5aac700a476e25c5,
+        type: 2}
+      propertyPath: personalSpaceRadius
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114920760429017162, guid: 0436a64d893bf4fd5aac700a476e25c5,
@@ -27487,11 +27484,6 @@ Prefab:
     - target: {fileID: 114920760429017162, guid: 0436a64d893bf4fd5aac700a476e25c5,
         type: 2}
       propertyPath: danceAfinity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114920760429017162, guid: 0436a64d893bf4fd5aac700a476e25c5,
-        type: 2}
-      propertyPath: personalSpaceRadius
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

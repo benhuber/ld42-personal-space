@@ -26,6 +26,8 @@ GameObject:
   - component: {fileID: 114059548823929268}
   - component: {fileID: 114920760429017162}
   - component: {fileID: 114138825885225212}
+  - component: {fileID: 169188660315880070}
+  - component: {fileID: 114414914527870412}
   m_Layer: 8
   m_Name: Crowd (8)
   m_TagString: Untagged
@@ -56,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085414001065288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.930012, y: 2.9049969, z: 0}
+  m_LocalPosition: {x: 8.47, y: -0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4880937164092772}
@@ -121,17 +123,17 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -235,6 +237,17 @@ MonoBehaviour:
   sr: {fileID: 212893040494352502}
   value: -1
   setColorBasedOnValue: 1
+--- !u!114 &114414914527870412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085414001065288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5a25558e72d44a7ad23f2260f1dba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114920760429017162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,10 +265,41 @@ MonoBehaviour:
   maxAvoidTime: -1
   talkAfinity: -1
   danceAfinity: -1
+  dontLeaveTheRoom: 0
   peopleLayer:
     serializedVersion: 2
     m_Bits: 256
   walkSpeed: 1
+  blaBlaClips:
+  - {fileID: 8300000, guid: d20b09b09998748258be92980bcf356f, type: 3}
+  - {fileID: 8300000, guid: 0a05373c848084b948ec1eba3b003a24, type: 3}
+  - {fileID: 8300000, guid: bae99a647b7284017af603b1c8388717, type: 3}
+  - {fileID: 8300000, guid: 62f660ef1b8a549d3b5244f1c35cfd4a, type: 3}
+  - {fileID: 8300000, guid: 7afe7379cf0de48b6afa71b94fbcc3ab, type: 3}
+--- !u!169 &169188660315880070
+AudioLowPassFilter:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085414001065288}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!212 &212853202678145332
 SpriteRenderer:
   m_ObjectHideFlags: 1

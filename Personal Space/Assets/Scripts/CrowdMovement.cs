@@ -37,6 +37,9 @@ public class CrowdMovement : MonoBehaviour {
     Rigidbody2D rb;
     GameObject GFX;
 
+    AudioSource audio;
+    public AudioClip[] blaBlaClips;
+
     private void Start() {
         // replace all negative values by random values
         if (personalSpaceRadius < 0) personalSpaceRadius = Random.Range(1f,3f);
@@ -48,6 +51,7 @@ public class CrowdMovement : MonoBehaviour {
         
         rb = GetComponent<Rigidbody2D>();
         GFX = transform.Find("GFX").gameObject;
+        audio = GetComponent<AudioSource>();
     }
 
     Collider2D[] lastCollision = new Collider2D[0];
@@ -79,6 +83,7 @@ public class CrowdMovement : MonoBehaviour {
                 var diff = talkPartner.position - transform.position;
                 GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(diff.x, diff.y, 0));
                 if (myTime > talkUntil) {
+                    audio.Stop();
                     Wait();
                 }
                 break;
@@ -103,6 +108,10 @@ public class CrowdMovement : MonoBehaviour {
                 bool beat1 = (myTime % 1) < 0.5;
                 GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(1, beat1?0.2f:-.2f, 0));
                 break;
+        }
+
+        if (currentState == State.TALKING || currentState == State.TALKING_AND_WALKING) {
+            audio.volume = Mathf.Max(1f - (transform.position - PlayerStatus.thePlayer.transform.position).magnitude*.1f, 0f);
         }
 
         if (currentState == State.WALKING || currentState == State.WALKING_TO_DANCEFLOOR) {
@@ -259,7 +268,8 @@ public class CrowdMovement : MonoBehaviour {
                 currentState = State.TALKING;
                 ChangeState(); // to update the targetPosition for talk&walk
                 otherCrowd.GetSpokenTo(duration, this.transform);
-                // Debug.Log("started to talk!");
+                audio.clip = blaBlaClips[Random.Range(0, blaBlaClips.Length)];
+                audio.Play();
                 return true;
             }
         }
