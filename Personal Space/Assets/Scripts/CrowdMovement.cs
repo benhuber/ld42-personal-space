@@ -19,6 +19,7 @@ public class CrowdMovement : MonoBehaviour {
     float nextStateChange = 0f;
     
     Vector3 targetPosition = new Vector3();
+    List<Vector3> walkPath = new List<Vector3>();
     float annoyance = 0f;
     
     float talkUntil = 0f;
@@ -68,7 +69,7 @@ public class CrowdMovement : MonoBehaviour {
                 }
                 break;
             case State.WALKING_TO_DANCEFLOOR:
-                if ((transform.position - targetPosition).magnitude < 3f) {
+                if ((transform.position - targetPosition).magnitude < 3f && walkPath.Count == 0) {
                     ChangeState();
                 }
                 break;
@@ -127,7 +128,7 @@ public class CrowdMovement : MonoBehaviour {
             direction += directionChanges;
             rb.velocity = direction.normalized * walkSpeed;
             GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(direction.x, direction.y, 0));
-            if ((transform.position - targetPosition).magnitude < 1f) {
+            if (CheckWalkingDone()) {
                 Wait();
             }
         } else {
@@ -143,16 +144,14 @@ public class CrowdMovement : MonoBehaviour {
             case State.WAITING:
                 if (Random.Range(0f,1f) < danceAfinity) {
                     // go dancing
-                    Transform target = PointOfInterest.GetPoIWithTag("dancefloor")[0].transform;
-                    // TODO pathfinding
-                    targetPosition = target.position;
+                    FindPathTo(PointOfInterest.GetPoIWithTag("dancefloor")[0]);
                     currentState = State.WALKING_TO_DANCEFLOOR;
                     nextStateChange = float.PositiveInfinity;
                 } else {
                     // pick point of interest and go there
                     // TODO pathfinding
                     var pois = PointOfInterest.poi.Where(x => !x.tags.Contains("dancefloor")).ToList();
-                    targetPosition = pois[Random.Range(0, pois.Count)].transform.position;
+                    FindPathTo(pois[Random.Range(0, pois.Count)]);
                     currentState = State.WALKING;
                     nextStateChange = float.PositiveInfinity;
                 }
@@ -184,6 +183,39 @@ public class CrowdMovement : MonoBehaviour {
                 ChangeState();
                 break;
         }
+    }
+
+    void FindPathTo(PointOfInterest poi) {
+        walkPath.Clear();
+        var currentRoom = PathManager.manager.GetMyRoom(transform.position);
+        if (currentRoom == null) {
+            Debug.LogError("I don't know where I am!!!!");
+            targetPosition = poi.transform.position;
+        } else if (currentRoom == poi.myRoom) {
+            targetPosition = poi.transform.position;
+        } else {
+            var roomTransitions = PathManager.manager.GetPathFromAToB(currentRoom, poi.myRoom);
+            if (roomTransitions == null) {
+                Debug.LogError("could not find a path from " + currentRoom.RoomName + " to " + poi.myRoom.RoomName);
+                targetPosition = transform.position;
+                return;
+            }
+            walkPath = roomTransitions;
+            walkPath.Add(poi.transform.position);
+            targetPosition = transform.position;
+        }
+        CheckWalkingDone();
+    }
+
+    bool CheckWalkingDone() {
+        if ((transform.position - targetPosition).magnitude < .5f) {
+            if (walkPath.Count == 0) {
+                return true;
+            }
+            targetPosition = walkPath[0];
+            walkPath.RemoveAt(0);
+        }
+        return false;
     }
 
     void Wait() {
@@ -234,7 +266,9 @@ public class CrowdMovement : MonoBehaviour {
             Gizmos.DrawLine(transform.position, talkPartner.position);
         } else {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(this.transform.position, targetPosition);
+            if (targetPosition != new Vector3()) {
+                Gizmos.DrawLine(this.transform.position, targetPosition);
+            }
             if (currentState == State.DANCING) {
                 Gizmos.DrawLine(this.transform.position, danceTarget);
             }

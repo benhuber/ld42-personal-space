@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PathManager : MonoBehaviour {
 
@@ -23,78 +24,80 @@ public class PathManager : MonoBehaviour {
         return null;
     }
 
-    public RoomTransition GetRoomTransition(Room A, Room B)
+    public List<Vector3> GetRoomTransition(Room A, Room B)
     {
         foreach (RoomTransition rt in Transitions)
         {
-            if (rt.RoomA == A && rt.RoomB == B) return rt;
-            if (rt.RoomA == B && rt.RoomB == A)
-            {
-                RoomTransition r = new RoomTransition();
-                r.RoomA = B;
-                r.RoomB = A;
-                List<GameObject> newnodeorder = new List<GameObject>();
-                foreach (GameObject n in rt.nodes) newnodeorder.Add(n);
-                newnodeorder.Reverse();
-                r.nodes = newnodeorder;
-                return r;
+            if (rt.RoomA == A && rt.RoomB == B) {
+                return TransitionToPositions(rt, false);
+            } else if (rt.RoomA == B && rt.RoomB == A) {
+                return TransitionToPositions(rt, true);
             }
         }
         return null;
     }
-    public RoomTransition GetRoomTransition(string nameA, string nameB)
+    public List<Vector3> GetRoomTransition(string nameA, string nameB)
     {
         Room A = GetRoom(nameA);
         Room B = GetRoom(nameB);
         return GetRoomTransition(A, B);        
     }
 
-    public List<RoomTransition> GetPathFromAToB(Room A, Room B)
-    {
-        List<RoomTransition> r = FindPath(A, B, new List<RoomTransition>());
-        string a = "";
-        if (r != null)
-        {
-            foreach (RoomTransition rt in r)
-            {
-                a += rt.RoomA + "<->" + rt.RoomB + "|";
+    public List<Vector3> TransitionToPositions(RoomTransition t, bool inverted) {
+        if (inverted) {
+            var result = new List<Vector3>();
+            foreach (var n in t.nodes) {
+                result.Add(n);
             }
-            Debug.Log(a);
+            result.Reverse();
+            return result;
+        } else {
+            return t.nodes;
         }
-        return r;
-
     }
-    public List<RoomTransition> GetPathFromAToB(string nameA, string nameB)
+
+    public List<Vector3> GetPathFromAToB(Room A, Room B)
+    {
+        return FindPath(A, B, new List<Vector3>(), new List<Room>(){A});
+    }
+    public List<Vector3> GetPathFromAToB(string nameA, string nameB)
     {
         Room A = GetRoom(nameA);
         Room B = GetRoom(nameB);
         return GetPathFromAToB(A, B);
-        
     }
 
 
-    private List<RoomTransition> FindPath( Room A, Room B, List<RoomTransition> Pathsofar)
+    private List<Vector3> FindPath( Room A, Room B, List<Vector3> pathSoFar, List<Room> roomsSoFar)
     {
-        RoomTransition trivial = GetRoomTransition(A.RoomName, B.RoomName);
+        List<Vector3> trivial = GetRoomTransition(A.RoomName, B.RoomName);
         if (trivial != null)
         {
-            Pathsofar.Add(trivial);
-            return Pathsofar;
+            pathSoFar.AddRange(trivial);
+            return pathSoFar;
         }
 
         foreach(RoomTransition rt in Transitions)
         {
-            if (rt.RoomA == A && !Pathsofar.Contains(rt)) {
-                List<RoomTransition> newsofar = Pathsofar;
-                newsofar.Add(rt);
-                List<RoomTransition> t = FindPath(rt.RoomB, B, newsofar);
+            if (rt.RoomA == A && !roomsSoFar.Contains(rt.RoomB)) {
+                int oldPathLength = pathSoFar.Count;
+                var newPoints = TransitionToPositions(rt, false);
+                pathSoFar.AddRange(newPoints);
+                roomsSoFar.Add(rt.RoomB);
+                List<Vector3> t = FindPath(rt.RoomB, B, pathSoFar, roomsSoFar);
                 if (t != null) return t;
+                roomsSoFar.Remove(rt.RoomB);
+                pathSoFar.RemoveRange(oldPathLength, newPoints.Count);
             }
-            if(rt.RoomB == A && !Pathsofar.Contains(rt)) {
-                List<RoomTransition> newsofar = Pathsofar;
-                newsofar.Add(rt);
-                List<RoomTransition> t = FindPath(rt.RoomA, B, newsofar);
+            if(rt.RoomB == A && !roomsSoFar.Contains(rt.RoomA)) {
+                int oldPathLength = pathSoFar.Count;
+                var newPoints = TransitionToPositions(rt, true);
+                pathSoFar.AddRange(newPoints);
+                roomsSoFar.Add(rt.RoomA);
+                List<Vector3> t = FindPath(rt.RoomA, B, pathSoFar, roomsSoFar);
                 if (t != null) return t;
+                roomsSoFar.Remove(rt.RoomB);
+                pathSoFar.RemoveRange(oldPathLength, newPoints.Count);
             }
         }
         return null;
