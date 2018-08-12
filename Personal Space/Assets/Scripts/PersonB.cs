@@ -56,7 +56,7 @@ public class PersonB : Talktome
         pm.StartWalking(PATHS[i], NextBehavior);
     }
 
-    private void FixedUpdate()
+    private new void FixedUpdate()
     {
         base.FixedUpdate();
         //BC

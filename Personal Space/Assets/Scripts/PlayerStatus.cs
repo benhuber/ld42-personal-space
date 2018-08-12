@@ -17,6 +17,9 @@ public class PlayerStatus : MonoBehaviour {
 
     private float calmSince;
 
+    //flags 
+    public bool foundCake = false;
+
     private void Awake()
     {
         thePlayer = this;

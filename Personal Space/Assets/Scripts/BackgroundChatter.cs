@@ -11,7 +11,7 @@ public class BackgroundChatter : MonoBehaviour {
     public Vector3 offset;
     AudioSource aud;
     TextMeshProUGUI tmp;
-    float maxdist = 5f;
+    public float maxdist = 10f;
 
     private void Start()
     {
