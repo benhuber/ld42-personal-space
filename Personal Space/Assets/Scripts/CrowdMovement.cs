@@ -19,6 +19,7 @@ public class CrowdMovement : MonoBehaviour {
     float nextStateChange = 0f;
     
     Vector3 targetPosition = new Vector3();
+    float annoyance = 0f;
     
     float talkUntil = 0f;
     Transform talkPartner;
@@ -28,9 +29,9 @@ public class CrowdMovement : MonoBehaviour {
 
     float myTime = 0f;
 
-    public LayerMask crowdLayer;
+    public LayerMask peopleLayer;
+    public float walkSpeed = 1f;
 
-    PersonMotor motor;
     Rigidbody2D rb;
     GameObject GFX;
 
@@ -40,10 +41,9 @@ public class CrowdMovement : MonoBehaviour {
         if (initTalkRadius < 0) initTalkRadius = Random.Range(0.5f, 2f);
         if (maxWaitTime < 0) maxWaitTime = Random.Range(3f, 20f);
         if (maxAvoidTime < 0) maxAvoidTime = Random.Range(1f,10f);
-        if (talkAfinity < 0) talkAfinity = Random.Range(0f, .5f);
-        if (danceAfinity < 0) danceAfinity = Random.Range(0f, 1f);
+        if (talkAfinity < 0) talkAfinity = Random.Range(0f, 1f);
+        if (danceAfinity < 0) danceAfinity = Random.Range(0f, .5f);
         
-        motor = GetComponent<PersonMotor>();
         rb = GetComponent<Rigidbody2D>();
         GFX = transform.Find("GFX").gameObject;
     }
@@ -56,7 +56,7 @@ public class CrowdMovement : MonoBehaviour {
         switch (currentState) {
             case State.WAITING:
             case State.WALKING:
-                Collider2D[] talkColliders = Physics2D.OverlapCircleAll(transform.position, initTalkRadius, crowdLayer);
+                Collider2D[] talkColliders = Physics2D.OverlapCircleAll(transform.position, initTalkRadius, peopleLayer);
                 if (talkColliders != null) {
                     var newColliders = talkColliders.Where(x => !lastCollision.Contains(x)).ToList();
                     lastCollision = talkColliders;
@@ -66,19 +66,14 @@ public class CrowdMovement : MonoBehaviour {
                         }
                     }
                 }
-                
-                
-                if (currentState == State.WALKING && rb.velocity.magnitude < 0.1f) {
-                    Wait();
-                }
                 break;
             case State.WALKING_TO_DANCEFLOOR:
-                if ((transform.position - targetPosition).magnitude < 2f) {
+                if ((transform.position - targetPosition).magnitude < 3f) {
                     ChangeState();
                 }
                 break;
             case State.TALKING:
-                var diff = targetPosition - transform.position;
+                var diff = talkPartner.position - transform.position;
                 GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(diff.x, diff.y, 0));
                 if (myTime > talkUntil) {
                     Wait();
@@ -89,7 +84,8 @@ public class CrowdMovement : MonoBehaviour {
                     ChangeState();
                 } else {
                     var diff2 = targetPosition - transform.position;
-                    rb.velocity = diff2.normalized * motor.speed;
+                    rb.velocity = diff2.normalized * walkSpeed;
+                    diff2 = talkPartner.position - transform.position;
                     GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(diff2.x, diff2.y, 0));
                 }
                 break;
@@ -98,12 +94,43 @@ public class CrowdMovement : MonoBehaviour {
                     danceTarget = targetPosition + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f,3f), 0f);
                     nextDanceStep = myTime + 2f;
                 }
-                if ((transform.position - danceTarget).magnitude > Time.fixedDeltaTime * 50f) {
-                    rb.velocity = (danceTarget - transform.position).normalized * Time.fixedDeltaTime * 50f;
+                if ((transform.position - danceTarget).magnitude > Time.fixedDeltaTime * walkSpeed * 2.5f) {
+                    rb.velocity = (danceTarget - transform.position).normalized * walkSpeed * 2.5f;
                 }
-                // GFX.transform.LookAt();
+                bool beat1 = (myTime % 1) < 0.5;
+                GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(beat1?0.2f:-.2f, -1, 0));
                 // wiggle in beat of music? all synchronously!
                 break;
+        }
+
+        if (currentState == State.WALKING || currentState == State.WALKING_TO_DANCEFLOOR) {
+            Collider2D[] personalSpaceColliders = Physics2D.OverlapCircleAll(transform.position, personalSpaceRadius, peopleLayer);
+            annoyance = Mathf.Lerp(annoyance, personalSpaceColliders.Length, 0.1f);
+            var direction = (targetPosition - transform.position).normalized;
+            Vector3 directionChanges = new Vector3();
+            foreach (var c in personalSpaceColliders) {
+                if (c.gameObject == this.gameObject) continue;
+                var directionToPerson = (c.transform.position - transform.position).normalized;
+                float distance = (c.transform.position - transform.position).magnitude - .5f;
+                float intensity = (personalSpaceRadius - distance) * (annoyance + 1);
+                Debug.Log(distance + " " + annoyance);
+                var commonComponent = Vector3.Dot(direction, directionToPerson) * directionToPerson;
+                var normal = direction - commonComponent;
+                normal.Normalize();
+                if (commonComponent.magnitude > 0.95f) {
+                    normal = new Vector3(directionToPerson.y, -directionToPerson.x, 0);
+                }
+                directionChanges += intensity * normal; // - intensity * commonComponent;
+            }
+            direction += directionChanges;
+            rb.velocity = direction.normalized * walkSpeed;
+            GFX.transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(direction.x, direction.y, 0));
+            if ((transform.position - targetPosition).magnitude < 1f) {
+                Wait();
+            }
+        } else {
+            annoyance *= 0.9f;
+            rb.velocity *= 0.3f;
         }
     }
 
@@ -116,14 +143,14 @@ public class CrowdMovement : MonoBehaviour {
                     // go dancing
                     Transform target = PointOfInterest.GetPoIWithTag("dancefloor")[0].transform;
                     // TODO pathfinding
-                    motor.StartWalking(new Transform[]{target}, StartDancing);
                     targetPosition = target.position;
                     currentState = State.WALKING_TO_DANCEFLOOR;
                     nextStateChange = float.PositiveInfinity;
                 } else {
                     // pick point of interest and go there
                     // TODO pathfinding
-                    motor.StartWalking(new Transform[]{PointOfInterest.RandomPoI().transform}, Wait);
+                    var pois = PointOfInterest.poi.Where(x => !x.tags.Contains("dancefloor")).ToList();
+                    targetPosition = pois[Random.Range(0, pois.Count)].transform.position;
                     currentState = State.WALKING;
                     nextStateChange = float.PositiveInfinity;
                 }
@@ -131,9 +158,9 @@ public class CrowdMovement : MonoBehaviour {
             case State.TALKING:
                 Debug.Log("check for personal space distance");
                 if (Mathf.Abs((transform.position - talkPartner.position).magnitude - personalSpaceRadius) > 0.1f) {
-                    targetPosition = (talkPartner.position - transform.position).normalized * personalSpaceRadius + transform.position;
+                    targetPosition = (transform.position - talkPartner.position).normalized * (personalSpaceRadius+.5f) + talkPartner.position;
                     currentState = State.TALKING_AND_WALKING;
-                    nextStateChange = myTime + 1f;
+                    nextStateChange = myTime + 3f;
                 } else {
                     nextStateChange = myTime + Random.Range(maxAvoidTime/2, maxAvoidTime);
                 }
@@ -147,11 +174,11 @@ public class CrowdMovement : MonoBehaviour {
                 // change will come from personMotor or collision
                 break;
             case State.WALKING_TO_DANCEFLOOR:
-                motor.StopWalking(); // calls StartDancing automatically
+                StartDancing();
                 break;
             case State.DANCING:
-                motor.enabled = true;
                 currentState = State.WAITING;
+                nextStateChange = 0f;
                 ChangeState();
                 break;
         }
@@ -163,17 +190,15 @@ public class CrowdMovement : MonoBehaviour {
     }
 
     void StartDancing() {
-        motor.enabled = false;
         currentState = State.DANCING;
         nextStateChange = myTime + 10f + Random.Range(0f,60f * danceAfinity);
     }
 
     private bool ConsiderTalking(Collider2D other) {
         CrowdMovement otherCrowd = other.gameObject.GetComponent<CrowdMovement>();
-        if (otherCrowd != null && freeToTalk() && otherCrowd.freeToTalk()) {
+        if (otherCrowd != null && otherCrowd != this && freeToTalk() && otherCrowd.freeToTalk()) {
             if (Random.Range(0f,1f) < talkAfinity) {
-                motor.StopWalking();
-                float duration = Random.Range(3f, 30f * (talkAfinity + otherCrowd.talkAfinity)/2f);
+                float duration = Random.Range(10f, 60f * (talkAfinity + otherCrowd.talkAfinity)/2f);
                 talkUntil = myTime + duration;
                 talkPartner = otherCrowd.transform;
                 currentState = State.TALKING;
@@ -191,7 +216,6 @@ public class CrowdMovement : MonoBehaviour {
     }
 
     public void GetSpokenTo(float duration, Transform other) {
-        motor.StopWalking();
         talkPartner = other;
         talkUntil = myTime + duration;
         currentState = State.TALKING;
@@ -203,6 +227,16 @@ public class CrowdMovement : MonoBehaviour {
     private void OnDrawGizmos()  {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, personalSpaceRadius);
+        if (currentState == State.TALKING || currentState == State.TALKING_AND_WALKING) {
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(transform.position, talkPartner.position);
+        } else {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(this.transform.position, targetPosition);
+            if (currentState == State.DANCING) {
+                Gizmos.DrawLine(this.transform.position, danceTarget);
+            }
+        }
     }
 
 }
