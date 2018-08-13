@@ -111,7 +111,7 @@ public class CrowdMovement : MonoBehaviour {
         }
 
         if (currentState == State.TALKING || currentState == State.TALKING_AND_WALKING) {
-            audioSource.volume = Mathf.Max(1f - (transform.position - PlayerStatus.thePlayer.transform.position).magnitude*.1f, 0f);
+            audioSource.volume = Mathf.Max(2f - (transform.position - PlayerStatus.thePlayer.transform.position).magnitude*.1f, 0f);
         }
 
         if (currentState == State.WALKING || currentState == State.WALKING_TO_DANCEFLOOR) {
