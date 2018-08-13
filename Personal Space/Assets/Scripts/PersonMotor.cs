@@ -53,10 +53,19 @@ public class PersonMotor : MonoBehaviour
         callwhendone = callback;
     }
 
+    public void StartWalking(Transform[] newnodes)
+    {
+        i = 0;
+        nodes = newnodes;
+        selectedNode = nodes[i];
+        walking = true;
+    }
+
     public void StopWalking()
     {
         walking = false;
-        callwhendone();
+        if(callwhendone != null) callwhendone();
+
     }
 
     private void OnDrawGizmos()

@@ -35,7 +35,7 @@ public class Talktome : MonoBehaviour {
     }
 
     public void FixedUpdate () {
-        if (Time.fixedTime > doneuntill) done = false;
+        if (Time.fixedTime > doneuntill &&resets) done = false;
         if (done) return;
 
         Collider2D player = Physics2D.OverlapCircle(transform.position, talkradius, Lplayer);
