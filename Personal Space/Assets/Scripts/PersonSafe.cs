@@ -6,6 +6,7 @@ public class PersonSafe : Talktome {
 
     // DIALOG
     public Sprite Portrait;
+    CrowdMovement movement;
 
     PLACEHOLDER_DATA.Endings oldending;
 
@@ -14,12 +15,14 @@ public class PersonSafe : Talktome {
     void Awake()
     {
         safe = this;
-        name = "Darya";
+        name = "Owen";
     }
 
     new void Start()
     {
         base.Start();
+        movement = GetComponent<CrowdMovement>();
+        movement.enabled = false;
         //DIALOG
         Dialog = Dialogbox.Dialogsystem.gameObject;
         NextBehavior();
@@ -55,7 +58,7 @@ public class PersonSafe : Talktome {
         else if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Time)
         {
             Dialogbox.Dialogstate Dend_fin = new Dialogbox.Dialogstate { end = true, callback = EndingManager.em.PlayEnd };
-            Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Owen", Message = "Hey, it's getting too crowded for me in here. Would you join me, if I leave?", optionA = " Of course. You watch my back, I watch yours.", optionB = "...", oA_changeval = 0f, oB_changeval = 0f, end = false };
+            Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Owen", Message = "Hey, it's getting too crowded for me in here. Would you join me, if I leave?", optionA = " Of course. You watch my back, I watch yours.", optionB = "", oA_changeval = 0f, oB_changeval = 0f, end = false };
             Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend_fin, oB_followup = Dend };
             ds = new Dialogbox.Dialogstate[3];
             ds[0] = ds0;
@@ -78,9 +81,22 @@ public class PersonSafe : Talktome {
         }
     }
 
+    Vector2 lastPlayerPos = new Vector2();
+
     private new void FixedUpdate()
     {
         base.FixedUpdate();
+
+        if (myTime > 60) {
+            PLACEHOLDER_DATA.data.ending = PLACEHOLDER_DATA.Endings.Time;
+            movement.enabled = true;
+            instigatesDialog = true;
+            Vector2 playerPos = PlayerStatus.thePlayer.transform.position;
+            if (movement.currentState != CrowdMovement.State.WALKING || (lastPlayerPos - playerPos).magnitude > 2) {
+                movement.ForceWalkTo(playerPos);
+                lastPlayerPos = playerPos;
+            }
+        }
 
         if (oldending != PLACEHOLDER_DATA.data.ending) NextBehavior();
         oldending = PLACEHOLDER_DATA.data.ending;
