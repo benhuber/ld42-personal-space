@@ -20,7 +20,7 @@ public class Talktome : MonoBehaviour {
     bool inDialog = false;
     public float talkradius = .6f;
 
-    bool done = false;
+    public bool done = false;
     float doneuntill;
 
     public void Start()
