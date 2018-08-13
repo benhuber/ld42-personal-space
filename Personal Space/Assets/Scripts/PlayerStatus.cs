@@ -38,7 +38,7 @@ public class PlayerStatus : MonoBehaviour {
         {
             Annoying a = p.GetComponent<Annoying>();
             if (a == null) continue;
-            float change = ChangeAnnoyance((radius - Mathf.Min(Vector2.Distance(p.transform.position, transform.position), radius)) * a.value);
+            float change = ((radius - Mathf.Min(Vector2.Distance(p.transform.position, transform.position), radius)) * a.value);
             ChangeAnnoyance(change);
         }
 
