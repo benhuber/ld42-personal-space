@@ -13,7 +13,10 @@ public class BackgroundChatter : MonoBehaviour {
     TextMeshProUGUI tmp;
     public float maxdist = 10f;
 
-    private void Start()
+    public delegate void callbacktype();
+    callbacktype currentcallback;
+
+    private void Awake()
     {
         aud = GetComponent<AudioSource>();
     }
@@ -27,8 +30,27 @@ public class BackgroundChatter : MonoBehaviour {
             Color c = tmp.color;
             c.a = a;
             tmp.color = c;
-            aud.volume = a;
+            aud.volume = a*3;
         }
+    }
+
+    public void Display(string text, Color color, float plusDuration, AudioClip clip, callbacktype callback)
+    {
+        Transform displayclone = Instantiate(localdisplay, transform.position + offset, transform.rotation, this.transform);
+        tmp = displayclone.GetComponentInChildren<TextMeshProUGUI>();
+        tmp.color = color;
+        tmp.text = text;
+        aud.clip = clip;
+        aud.Play();
+        doneat = Time.time + clip.length + plusDuration;
+        Destroy(displayclone.gameObject, clip.length + plusDuration);
+        currentcallback = callback;
+        Invoke("Callback", clip.length + plusDuration);
+    }
+
+    public void Callback()
+    {
+        if (currentcallback != null) currentcallback();
     }
 
     public void Display(string text, Color color, float plusDuration, AudioClip clip)
