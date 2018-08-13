@@ -4117,6 +4117,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114562686430593862, guid: 9f45953a53ed7f64bb993555f5123cac,
+        type: 2}
+      propertyPath: resettime
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114946818384700064, guid: 9f45953a53ed7f64bb993555f5123cac, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9f45953a53ed7f64bb993555f5123cac, type: 2}
@@ -7099,6 +7104,21 @@ Prefab:
       propertyPath: m_Radius
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114118755574435340, guid: 18cd53d62d5b91f46adf91c95a85109b,
+        type: 2}
+      propertyPath: setColorBasedOnValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118755574435340, guid: 18cd53d62d5b91f46adf91c95a85109b,
+        type: 2}
+      propertyPath: value
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118755574435340, guid: 18cd53d62d5b91f46adf91c95a85109b,
+        type: 2}
+      propertyPath: sr
+      value: 
+      objectReference: {fileID: 1025933402}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cd53d62d5b91f46adf91c95a85109b, type: 2}
   m_IsPrefabAsset: 0
@@ -36572,6 +36592,11 @@ Transform:
   m_Father: {fileID: 563158404}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &945829869 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212422652171807398, guid: e16d800014bcb7d448d5d82eeeea58b0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1601532271}
 --- !u!1001 &947838221
 Prefab:
   m_ObjectHideFlags: 0
@@ -37471,7 +37496,7 @@ Transform:
   m_GameObject: {fileID: 983258937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_Children: []
   m_Father: {fileID: 1257559673}
   m_RootOrder: 0
@@ -38697,6 +38722,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4344396500226364, guid: 0436a64d893bf4fd5aac700a476e25c5,
     type: 2}
   m_PrefabInternal: {fileID: 1272797099}
+--- !u!212 &1025933402 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212049541893480626, guid: 18cd53d62d5b91f46adf91c95a85109b,
+    type: 2}
+  m_PrefabInternal: {fileID: 246235018}
 --- !u!1 &1029948885
 GameObject:
   m_ObjectHideFlags: 0
@@ -51979,6 +52009,11 @@ Prefab:
       propertyPath: value
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114495456134046384, guid: e16d800014bcb7d448d5d82eeeea58b0,
+        type: 2}
+      propertyPath: sr
+      value: 
+      objectReference: {fileID: 945829869}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e16d800014bcb7d448d5d82eeeea58b0, type: 2}
   m_IsPrefabAsset: 0
@@ -56471,6 +56506,11 @@ Prefab:
     - target: {fileID: 1085414001065288, guid: 0436a64d893bf4fd5aac700a476e25c5, type: 2}
       propertyPath: m_Name
       value: Smiling Person
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138825885225212, guid: 0436a64d893bf4fd5aac700a476e25c5,
+        type: 2}
+      propertyPath: value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0436a64d893bf4fd5aac700a476e25c5, type: 2}
@@ -65260,10 +65300,8 @@ GameObject:
   - component: {fileID: 2107836033}
   - component: {fileID: 2107836032}
   - component: {fileID: 2107836031}
-  - component: {fileID: 2107836030}
-  - component: {fileID: 2107836029}
   - component: {fileID: 2107836028}
-  - component: {fileID: 2107836035}
+  - component: {fileID: 2107836029}
   m_Layer: 8
   m_Name: Person Safe
   m_TagString: Untagged
@@ -65316,29 +65354,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2107836026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4769ab18011874fb07f5a56504ece8, type: 3}
+  m_Script: {fileID: 11500000, guid: bc347e81f2a1740e5837cfd3a3b8d268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedNode: {fileID: 0}
-  GFX: {fileID: 204100110}
-  speed: 1
-  distThreshhold: 0.2
-  walking: 0
---- !u!114 &2107836030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2107836026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1a2effc15ebdf4198ad7e4d8f31c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localdisplay: {fileID: 224111668302216074, guid: 7aec131b122ef9b4ea80386883d010d3,
-    type: 2}
-  offset: {x: 0, y: 0, z: 0}
-  maxdist: 5
+  personalSpaceRadius: -1
+  initTalkRadius: -1
+  maxWaitTime: -1
+  maxAvoidTime: -1
+  talkAfinity: -1
+  danceAfinity: -1
+  dontLeaveTheRoom: 0
+  currentState: 0
+  peopleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  walkSpeed: 2
+  blaBlaClips: []
 --- !u!82 &2107836031
 AudioSource:
   m_ObjectHideFlags: 0
@@ -65515,20 +65546,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2107836035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2107836026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e426e217fa1ea1c428ee12b358326975, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sr: {fileID: 0}
-  value: 0
-  setColorBasedOnValue: 0
 --- !u!1 &2108413866
 GameObject:
   m_ObjectHideFlags: 0

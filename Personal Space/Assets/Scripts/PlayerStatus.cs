@@ -40,6 +40,7 @@ public class PlayerStatus : MonoBehaviour {
             Annoying a = p.GetComponent<Annoying>();
             if (a == null) continue;
             float change = ((radius - Mathf.Min(Vector2.Distance(p.transform.position, transform.position), radius)) * a.value / 2f);
+            change *= change;
             ChangeAnnoyance(change);
         }
 
@@ -49,7 +50,7 @@ public class PlayerStatus : MonoBehaviour {
             else if (calmSince + 2f < Time.time) recovery = .5f;
             else if (calmSince + 1f < Time.time) recovery = .25f;
 
-            if (annoyance < 200) {
+            if (annoyance < 230) {
                 recovery *= .5f;
             }
 

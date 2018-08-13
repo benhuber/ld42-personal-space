@@ -87,7 +87,7 @@ public class PersonSafe : Talktome {
     {
         base.FixedUpdate();
 
-        if (myTime > 60) {
+        if (myTime > 6*60) {
             PLACEHOLDER_DATA.data.ending = PLACEHOLDER_DATA.Endings.Time;
             movement.enabled = true;
             instigatesDialog = true;
