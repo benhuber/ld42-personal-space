@@ -13,21 +13,29 @@ public class MainMenuManager : MonoBehaviour {
 	public GameObject MenuBackground;
 	public GameObject CreditBackground;
 
+	public FaderScript fader;
+
+	private bool waitingForLoad = false;
+
 	// Use this for initialization
 	void Start () {
 		ShowMenu();
 		HideCredit();
+		fader.StartFadeOut();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (waitingForLoad && fader.GetState() == FaderScript.EFaderstate.none)
+		{
+			SceneManager.LoadScene("IntroCutscene", LoadSceneMode.Single);
+		}
 	}
 
 	public void OnPlayButtonClick()
 	{
-		// Load the game scene
-		SceneManager.LoadScene("IntroCutscene", LoadSceneMode.Single);
+		fader.StartFadeIn();
+		waitingForLoad = true;
 	}
 
 	public void OnOpenCreditButtonClick()
