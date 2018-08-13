@@ -40,10 +40,22 @@ protected PersistentDataComponent dataCom;
     public void OnPointerEnter(PointerEventData eventData)
     {
         endingManager.SetNameText(text);
+
+		Color newColor = GetComponent<Image>().color;
+		newColor.r = newColor.r + 0.2f;
+		newColor.g = newColor.g + 0.2f;
+		newColor.b = newColor.b + 0.2f;
+		GetComponent<Image>().color = newColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         endingManager.SetNameText("");
+
+		Color newColor = GetComponent<Image>().color;
+		newColor.r = newColor.r - 0.2f;
+		newColor.g = newColor.g - 0.2f;
+		newColor.b = newColor.b - 0.2f;
+		GetComponent<Image>().color = newColor;
     }
 }
