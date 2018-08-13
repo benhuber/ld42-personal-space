@@ -20,6 +20,7 @@ public class PlayerStatus : MonoBehaviour {
 
     //flags 
     public bool foundCake = false;
+    public bool freedBird = false;
 
     private void Awake()
     {

@@ -13,10 +13,15 @@ public class PersonFriend1 : Talktome {
     public Sprite Portrait;
     PLACEHOLDER_DATA.Endings oldending;
 
+    //PATHFINDING
+    public Transform[] PathA;
+    public Transform[] PathB;
+    PersonMotor pm;
+
     public float timepertalk = 60f;
     float time = 0f;
     bool cakefalg = false;
-    int nthDialog = 0;
+    int behavior = 0;
 
     Annoying annoy;
 
@@ -34,7 +39,7 @@ public class PersonFriend1 : Talktome {
         col = Color.blue;
         //DIALOG
         Dialog = Dialogbox.Dialogsystem.gameObject;
-        NextBehavior();
+        
 
         Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
         Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Rosie", Message = "You're here!! I'm so happy you made it. Have you seen Mew? Can you maybe check, if they are alright. They like you so much. ", optionA = "Sure, I wanted to find Miss Mister Mew anyway.", optionB = "Uhm, they were stressing out a bit, so I let them out of the flat.", oA_changeval = -10f, oB_changeval = 20f, end = false, callback = talkedToFriend };
@@ -47,10 +52,52 @@ public class PersonFriend1 : Talktome {
 
         time = timepertalk;
         annoy = GetComponent<Annoying>();
+
+        //PATHFINDING
+        pm = GetComponent<PersonMotor>();
+
+
+        NextBehavior();
     }
 
     public void NextBehavior()
     {
+        
+        if (myTime < 135 && !(behavior == 1)) //BEHAVIOR 1
+        {
+            behavior= 1;
+            bc.Display("tense debate about the police", col, 3f, friendclips[0], NextBehavior);
+            annoy.value = .6f;
+            return;
+        }
+        if (myTime < 180 && !(behavior == 2)) //BEHAVIOR 2
+        {
+            behavior = 2;
+            pm.StartWalking(PathA, NextBehavior);
+            annoy.value = 0f;
+            return;
+        }
+        if (myTime < 285 && !(behavior == 3)) //BEHAVIOR 3
+        {
+            behavior = 3;
+            bc.Display("cheerfull exchange about the cake", col, 3f, friendclips[1], NextBehavior);
+            annoy.value = 0f;
+            return;
+        }
+        if (myTime >= 285 && !(behavior == 4)) //BEHAVIOR 4
+        {
+            behavior = 4;
+            pm.StartWalking(PathB, NextBehavior);
+            annoy.value = 0f;
+            return;
+        }
+
+
+    }
+
+    private new void FixedUpdate()
+    {
+        base.FixedUpdate();
         if (PlayerStatus.thePlayer.foundCake)
         {
             Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
@@ -63,39 +110,6 @@ public class PersonFriend1 : Talktome {
             dt[0] = dt0;
             cakefalg = true;
         }
-        if (nthDialog == 1)
-        {
-            bc.Display("tense debate about policebrutality", col, 3f, friendclips[nthDialog - 1]);
-            annoy.value = .6f;
-        }
-        if (nthDialog == 2)
-        {
-            bc.Display("pleasant debate about horror movies", col, 3f, friendclips[nthDialog - 1]);
-            annoy.value = 0f;
-        }
-        if (nthDialog == 3)
-        {
-            bc.Display("boring debate about school", col, 3f, friendclips[nthDialog - 1]);
-            annoy.value = .2f;
-        }
-        if (nthDialog == 4)
-        {
-            bc.Display("scientific debate about pokemon", col, 3f, friendclips[nthDialog - 1]);
-            annoy.value = 0f;
-        }
-    }
-
-    private new void FixedUpdate()
-    {
-        base.FixedUpdate();
-        time += Time.fixedDeltaTime;
-        if (time > timepertalk) {
-            nthDialog++;
-            NextBehavior();
-            time = 0;
-        }
-        if (PlayerStatus.thePlayer.foundCake &&!cakefalg) NextBehavior();
-
 
     }
 
@@ -105,7 +119,7 @@ public class PersonFriend1 : Talktome {
         {
             talked = true;
             PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo++;
-            MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/5 frieds met");
+            MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/3 frieds met");
         }
     }
 
