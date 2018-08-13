@@ -13,10 +13,10 @@ public class CrowdMovement : MonoBehaviour {
     public float danceAfinity = -1f;
     public bool dontLeaveTheRoom = false;
 
-    enum State {
+    public enum State {
         WAITING, TALKING, TALKING_AND_WALKING, WALKING, WALKING_TO_DANCEFLOOR, DANCING
     }
-    State currentState = State.WAITING;
+    public State currentState = State.WAITING;
     float nextStateChange = 0f;
     
     Vector3 targetPosition = new Vector3();
