@@ -41,7 +41,7 @@ public class PersonCat : Talktome{
     new private void FixedUpdate() {
         base.FixedUpdate();
 
-        if (myTime > 20f && !atDoor) {
+        if (myTime > 120f && !atDoor) {
             if ((transform.position - door.position).magnitude < 1.5f) {
                 movement.enabled = false;
                 atDoor = true;
@@ -78,10 +78,15 @@ public class PersonCat : Talktome{
     }
 
     void Vanish() {
+        bool petted = talked;
         talkedToFriend();
-        MessageHandler.me.EnqueMessage("Achievement 'Cat Person': Miss Mr. Mew likes you.");
-        var data = FindObjectOfType<PersistentDataComponent>();
-        data.CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_CatPerson);
+        
+        if (petted) {
+            MessageHandler.me.EnqueMessage("Achievement 'Cat Person': Miss Mr. Mew likes you.");
+            var data = FindObjectOfType<PersistentDataComponent>();
+            data.CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_CatPerson);
+        }
+        
         Destroy(this.gameObject); 
     }
 
