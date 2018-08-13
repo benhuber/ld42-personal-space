@@ -154,7 +154,7 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 512
-  radius: 4
+  radius: 3.5
   growthspeed: 0.6
 --- !u!212 &212145994148294130
 SpriteRenderer:

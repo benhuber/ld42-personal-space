@@ -140,7 +140,7 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 512
-  radius: 4
+  radius: 3.5
   growthspeed: 0.6
 --- !u!114 &114925162295231408
 MonoBehaviour:
