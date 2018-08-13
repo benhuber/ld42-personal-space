@@ -180,7 +180,7 @@ public class CrowdMovement : MonoBehaviour {
                 } else {
                     // pick point of interest and go there
                     var pois = PointOfInterest.poi.Where(x => !x.tags.Contains("dancefloor")).ToList();
-                    pois.OrderBy(x => x.transform.position - transform.position);
+                    pois = pois.OrderBy(x => x.transform.position - transform.position).ToList();
                     FindPathTo(pois[Random.Range(0, Mathf.Min(pois.Count, 3))]);
                     currentState = State.WALKING;
                     nextStateChange = float.PositiveInfinity;

@@ -6,6 +6,7 @@ using TMPro;
 public class Clock : MonoBehaviour {
 
 	TextMeshProUGUI clocktext;
+    bool nightowl = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,5 +22,14 @@ public class Clock : MonoBehaviour {
 		int min = (timeInMin%60);
 		bool sep = (myTime % 2) < 1;
 		clocktext.text = hour + (sep?":":" ") + (min<10?"0":"") + min;
+
+        if (hour >= 23 && !nightowl) NightOwl();
 	}
+
+    void NightOwl()
+    {
+        nightowl = true;
+        PLACEHOLDER_DATA.data.NightOwl = true;
+        MessageHandler.me.EnqueMessage("Archievement 'Night Owl': You stayed at the party longer than expected!");
+    }
 }
