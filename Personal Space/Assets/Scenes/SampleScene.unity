@@ -29336,7 +29336,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   walkSpeed: 2
-  blaBlaClips: []
+  blaBlaClips:
+  - {fileID: 8300000, guid: d20b09b09998748258be92980bcf356f, type: 3}
+  - {fileID: 8300000, guid: 0a05373c848084b948ec1eba3b003a24, type: 3}
+  - {fileID: 8300000, guid: bae99a647b7284017af603b1c8388717, type: 3}
+  - {fileID: 8300000, guid: 62f660ef1b8a549d3b5244f1c35cfd4a, type: 3}
+  - {fileID: 8300000, guid: 7afe7379cf0de48b6afa71b94fbcc3ab, type: 3}
 --- !u!114 &1603730335
 MonoBehaviour:
   m_ObjectHideFlags: 0
