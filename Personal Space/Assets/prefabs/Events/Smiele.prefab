@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4917679949298078}
   - component: {fileID: 212225003877353450}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4153707028784578}
   - component: {fileID: 212762969457638460}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 114109248258181068}
   - component: {fileID: 114723554440358690}
   - component: {fileID: 58362344230930612}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Smiele
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,8 +81,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1929387264638812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.35, y: 26.76, z: -0.65625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.03, y: -0.04, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4153707028784578}
   - {fileID: 4917679949298078}
@@ -128,13 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2183856c9324021429daf09192a5d4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1540585644712490}
-  scene: {fileID: 1511638580091614}
-  sr: {fileID: 0}
-  growing: 0
-  extended: 0
-  shrunk: 1
-  shrinking: 0
+  oneShot: 1
   speed: 1.3
   amplitude: 0.3
   player:

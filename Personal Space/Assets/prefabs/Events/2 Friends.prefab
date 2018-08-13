@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4265593242302020}
   - component: {fileID: 212555198400572040}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 114760410095953146}
   - component: {fileID: 114632411253437298}
   - component: {fileID: 58271550863849168}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: 2 Friends
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4339976843432708}
   - component: {fileID: 212817526261222476}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550180505735338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.09, y: 9.22, z: -0.65625}
+  m_LocalPosition: {x: -18.66, y: 3.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4339976843432708}
@@ -142,13 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2183856c9324021429daf09192a5d4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1702535376766006}
-  scene: {fileID: 1204358267719520}
-  sr: {fileID: 0}
-  growing: 0
-  extended: 0
-  shrunk: 1
-  shrinking: 0
+  oneShot: 0
   speed: 1.3
   amplitude: 0.3
   player:
