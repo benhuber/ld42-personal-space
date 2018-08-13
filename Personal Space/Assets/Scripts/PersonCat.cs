@@ -65,7 +65,7 @@ public class PersonCat : Talktome{
         Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = Vanish };
         Dialogbox.Dialogstate DendIgnore = new Dialogbox.Dialogstate { end = true, callback = null };
         Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Miss Mr. Mew",
-            Message = "Miss Mister Mew seems annoyed with the party. They scratch at the door.",
+            Message = "Miss Mr. Mew seems annoyed with the party. They scratch at the door.",
             optionA = "*open the door for Mew*", optionB = "*ignore Mew*",
             oA_changeval = -10f, oB_changeval = 20f, end = false};
 
@@ -78,6 +78,10 @@ public class PersonCat : Talktome{
     }
 
     void Vanish() {
+        talkedToFriend();
+        MessageHandler.me.EnqueMessage("Achievement 'Cat Person': Miss Mr. Mew likes you.");
+        var data = FindObjectOfType<PersistentDataComponent>();
+        data.CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_CatPerson);
         Destroy(this.gameObject); 
     }
 
