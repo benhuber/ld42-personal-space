@@ -50,7 +50,7 @@ public class PersonBook : Talktome
 
     public  void ReturnedBook()
     {
-        PLACEHOLDER_DATA.data.Bookclub = true;
+        FindObjectOfType<PersistentDataComponent>().CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_Bookclub);
         MessageHandler.me.EnqueMessage("Archievement 'Book Club': you returned the Book to Nasim!");
     }
 }

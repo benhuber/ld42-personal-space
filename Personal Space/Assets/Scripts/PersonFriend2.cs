@@ -186,7 +186,8 @@ public class PersonFriend2 : Talktome{
     void PersistenceArchieve()
     {
         talkedToFriend();
-        //TODO 
+        MessageHandler.me.EnqueMessage("Archievement 'Persistent': You exhausted Jills dialogtree.");
+        FindObjectOfType<PersistentDataComponent>().CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_Persistant);
     }
 
 

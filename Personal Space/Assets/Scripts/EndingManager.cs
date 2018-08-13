@@ -19,12 +19,13 @@ public class EndingManager : MonoBehaviour {
 
     public void PlayEnd()
     {
+        PersistentDataComponent p = FindObjectOfType<PersistentDataComponent>();
         Time.timeScale = 0f;
         Endscreen.SetActive(true);
-        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Default) E1.SetActive(true);
-        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.AllFriendsDone) E2.SetActive(true);
-        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Stress) E3.SetActive(true);
-        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Time) E4.SetActive(true);
+        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Default) p.CompleteAnEnding(PersistentDataComponent.EEndings.EEndings_Default); //E1.SetActive(true);
+        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.AllFriendsDone) p.CompleteAnEnding(PersistentDataComponent.EEndings.EEndings_AllFriendsDone); //E2.SetActive(true);
+        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Stress) p.CompleteAnEnding(PersistentDataComponent.EEndings.EEndings_Stress); //E3.SetActive(true);
+        if (PLACEHOLDER_DATA.data.ending == PLACEHOLDER_DATA.Endings.Time) p.CompleteAnEnding(PersistentDataComponent.EEndings.EEndings_Time); //E4.SetActive(true);
     }
 
 }
