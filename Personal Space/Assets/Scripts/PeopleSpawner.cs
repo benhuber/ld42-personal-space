@@ -56,7 +56,7 @@ public class PeopleSpawner : MonoBehaviour {
 	}
 
 	CrowdMovement GetNextPerson() {
-		Debug.Log(nextPoolIdx + " <? " + peoplePool.Count);
+		// Debug.Log(nextPoolIdx + " <? " + peoplePool.Count);
 		CrowdMovement newP = peoplePool[nextPoolIdx].GetComponent<CrowdMovement>();
 		nextPoolIdx += 1;
 		return newP;
