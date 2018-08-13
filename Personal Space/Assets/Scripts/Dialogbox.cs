@@ -17,6 +17,9 @@ public class Dialogbox : MonoBehaviour {
     public TextMeshProUGUI B_opA;
     public TextMeshProUGUI B_opB;
 
+    public Mask mask;
+    public Image Imask;
+
     public Image Portrait;
     public Sprite defaultimg;
 
@@ -48,7 +51,8 @@ public class Dialogbox : MonoBehaviour {
         B_opB.text = currentState.optionB;
         B_opA.transform.parent.gameObject.SetActive(currentState.optionA != "");
         B_opB.transform.parent.gameObject.SetActive(currentState.optionB != "");
-
+        mask.enabled=(currentState.mask);
+        Imask.enabled = (currentState.mask);
 
     }
 
@@ -90,7 +94,7 @@ public class Dialogbox : MonoBehaviour {
 
     }
 
-    public struct Dialogstate{
+    public class Dialogstate{
         public string Title;
         public string Message;
         public string optionA;
@@ -101,6 +105,7 @@ public class Dialogbox : MonoBehaviour {
         public Sprite Avatar;
         public delegate void callbacktype();
         public callbacktype callback;
+        public bool mask = false;
     }
 
     public struct Dialogtransition
