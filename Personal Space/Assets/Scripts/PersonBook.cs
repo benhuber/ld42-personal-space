@@ -32,7 +32,7 @@ public class PersonBook : Talktome
         bc = GetComponent<BackgroundChatter>();
         //DIALOG
         Dialog = Dialogbox.Dialogsystem.gameObject;
-        Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true };
+        Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = ReturnedBook };
         Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Nasim", Message = "Hey, you made it. Did you bring my book along by any chance?", optionA = "Yes, thanks for lending it.", optionB = "What..? Oh, yes. Here you go.", oA_changeval = 0f, oB_changeval = 0f, end = false, mask = true };
         Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend, oB_followup = Dend };
         ds = new Dialogbox.Dialogstate[2];
@@ -54,5 +54,11 @@ public class PersonBook : Talktome
             started = true;
         }
 
+    }
+
+    public  void ReturnedBook()
+    {
+        PLACEHOLDER_DATA.data.Bookclub = true;
+        MessageHandler.me.EnqueMessage("Archievement 'Book Club': you returned the Book to Nasim!");
     }
 }
