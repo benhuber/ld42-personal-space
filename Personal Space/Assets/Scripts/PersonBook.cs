@@ -49,7 +49,7 @@ public class PersonBook : Talktome
     {
         base.FixedUpdate();
         //BC
-        if (!started && Time.fixedTime > Startwalkingafter) {
+        if (!started && myTime > Startwalkingafter) {
             pm.StartWalking(PathA);
             started = true;
         }

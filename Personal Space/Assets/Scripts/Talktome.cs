@@ -42,8 +42,10 @@ public class Talktome : MonoBehaviour {
         doneuntill = Time.fixedTime + resettime;
     }
 
+    [HideInInspector] public float myTime = 0f;
 
     public void FixedUpdate () {
+        myTime += Time.fixedDeltaTime;
         if (Time.fixedTime > doneuntill && resets) done = false;
     }
 
