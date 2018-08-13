@@ -46,6 +46,13 @@ public class Talktome : MonoBehaviour {
 
     public void FixedUpdate () {
         myTime += Time.fixedDeltaTime;
+
+        if (instigatesDialog && !done) {
+            Collider2D[] personalSpaceColliders = Physics2D.OverlapCircleAll(transform.position, 2f, Lplayer);
+            if (personalSpaceColliders.Length > 0) {
+                OnInteract();
+            }
+        }
         if (Time.fixedTime > doneuntill && resets) {
             done = false;
             RegisterIfNeeded();

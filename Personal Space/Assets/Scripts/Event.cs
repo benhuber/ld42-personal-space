@@ -7,6 +7,7 @@ public class Event : MonoBehaviour {
     GameObject icon;
     GameObject scene;
     public bool oneShot = false;
+    public float stressChange = 0f;
 
     SpriteRenderer sr;
     bool growing;
@@ -45,6 +46,7 @@ public class Event : MonoBehaviour {
 
         if (1 - scene.transform.localScale.x < .05 && !extended) {
             extended = true;
+            PlayerStatus.thePlayer.annoyance += stressChange;
             growing = false;
         }
         if (scene.transform.localScale.x < .1 && !shrunk)
