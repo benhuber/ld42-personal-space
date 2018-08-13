@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4439986474965976}
   - component: {fileID: 212543700947510776}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 114509576777953724}
   - component: {fileID: 114013865799053114}
   - component: {fileID: 58534207811741636}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Kangaroo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4687297839497782}
   - component: {fileID: 212205733939665732}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,8 +81,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758479120401806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.02, y: 24.44, z: -0.65625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.01, y: 0.02, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4439986474965976}
   - {fileID: 4687297839497782}
@@ -142,13 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2183856c9324021429daf09192a5d4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1553769923062334}
-  scene: {fileID: 1812954527395060}
-  sr: {fileID: 0}
-  growing: 0
-  extended: 0
-  shrunk: 1
-  shrinking: 0
+  oneShot: 0
   speed: 1.3
   amplitude: 0.3
   player:

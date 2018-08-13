@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4721451659575818}
   - component: {fileID: 212269063294790620}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4612494908855566}
   - component: {fileID: 212051292612783114}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 114758040565992790}
   - component: {fileID: 114100560909210600}
   - component: {fileID: 58601353637784216}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503333317747300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.77, y: 18.16, z: -0.65625}
+  m_LocalPosition: {x: 23.26, y: 37.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4612494908855566}
@@ -142,13 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2183856c9324021429daf09192a5d4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1188708867638422}
-  scene: {fileID: 1164316564992740}
-  sr: {fileID: 0}
-  growing: 0
-  extended: 0
-  shrunk: 1
-  shrinking: 0
+  oneShot: 0
   speed: 1.3
   amplitude: 0.3
   player:

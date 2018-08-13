@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4431679230785864}
   - component: {fileID: 212544594828443730}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 114735042089005388}
   - component: {fileID: 114327223984694830}
   - component: {fileID: 58321494523404572}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Butt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4678906976706568}
   - component: {fileID: 212734298905402582}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,8 +81,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1419140992879672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.41, y: 18.54, z: -0.65625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.01, y: 0, z: -0.9453125}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4678906976706568}
   - {fileID: 4431679230785864}
@@ -142,13 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2183856c9324021429daf09192a5d4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1923734459435870}
-  scene: {fileID: 1087288645472990}
-  sr: {fileID: 0}
-  growing: 0
-  extended: 0
-  shrunk: 1
-  shrinking: 0
+  oneShot: 0
   speed: 1.3
   amplitude: 0.3
   player:

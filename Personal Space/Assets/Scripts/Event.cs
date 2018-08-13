@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Event : MonoBehaviour {
 
-    public GameObject icon;
-    public GameObject scene;
-    public SpriteRenderer sr;
+    GameObject icon;
+    GameObject scene;
+    public bool oneShot = false;
 
-    public bool growing;
-    public bool extended;
-    public bool shrunk = true;
-    public bool shrinking;
+    SpriteRenderer sr;
+    bool growing;
+    bool extended;
+    bool shrunk = true;
+    bool shrinking;
 
     Vector3 origin;
 
@@ -25,7 +26,9 @@ public class Event : MonoBehaviour {
 
 
 	void Start () {
+        icon = transform.Find("Icon").gameObject;
         origin = icon.transform.localScale;
+        scene = transform.Find("screen").gameObject;
         sr = scene.GetComponent<SpriteRenderer>();
 	}
 
@@ -35,7 +38,6 @@ public class Event : MonoBehaviour {
         if (growing) scene.transform.localScale += new Vector3(growthspeed * Time.deltaTime, growthspeed * Time.deltaTime, 0);
         if(shrinking) scene.transform.localScale -= new Vector3(growthspeed * Time.deltaTime, growthspeed * Time.deltaTime, 0);
         sr.enabled = !shrunk;
-
     }
 
     // Update is called once per frame
@@ -62,6 +64,9 @@ public class Event : MonoBehaviour {
         {
             shrinking = true;
             growing = false;
+            if (extended && oneShot) {
+                gameObject.SetActive(false);
+            }
             extended = false;
         }
 	}
