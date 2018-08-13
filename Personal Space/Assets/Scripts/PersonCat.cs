@@ -19,9 +19,9 @@ public class PersonCat : Talktome{
 
 
         Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
-        Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Mr. Mew",
+        Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Miss Mr. Mew",
             Message = "Mr. Mew is sitting on the Couch, observing the Crowd.",
-            optionA = "*Pet Mr. Mew*", optionB = "",
+            optionA = "*Pet Miss Mr. Mew*", optionB = "",
             oA_changeval = -10f, oB_changeval = 20f, end = false, callback = talkedToFriend };
         Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend, oB_followup = Dend };
         ds = new Dialogbox.Dialogstate[2];

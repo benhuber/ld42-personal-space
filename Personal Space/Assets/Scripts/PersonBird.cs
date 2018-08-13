@@ -25,7 +25,7 @@ public class PersonBird : Talktome {
             Avatar = Portrait,
             Title = "Coco the Canary",
             Message = "Coco is sitting in their cage, seemingly frightend by the loud music.",
-            optionA = "*Open the cage*",
+            optionA = "*Open the cage and the window next to it*",
             optionB = "*walk away*",
             oA_changeval = -10f,
             oB_changeval = 0f,
