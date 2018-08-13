@@ -7,7 +7,6 @@ public class PersonBird : Talktome {
     PLACEHOLDER_DATA.Endings oldending;
 
     bool talked;
-    Annoying annoy;
 
     public GameObject closed;
     public GameObject open;
@@ -32,14 +31,12 @@ public class PersonBird : Talktome {
             oB_changeval = 0f,
             end = false,
         };
-        Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend2, oB_followup = Dend };
+        Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend, oB_followup = Dend2 };
         ds = new Dialogbox.Dialogstate[2];
         ds[0] = ds0;
         ds[1] = Dend;
         dt = new Dialogbox.Dialogtransition[1];
         dt[0] = dt0;
-
-        annoy = GetComponent<Annoying>();
     }
 
 

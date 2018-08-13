@@ -7,10 +7,7 @@ public class PersonBook : Talktome
 
     // DIALOG
     public Sprite Portrait;
-    //BC
-    BackgroundChatter bc;
-    Color col;
-    public AudioClip hohoclip;
+
     //PATHFINDING
     public Transform[] PathA;
 
@@ -19,8 +16,6 @@ public class PersonBook : Talktome
     bool started = false;
     public float Startwalkingafter = 165f;
 
-    int i = 0;
-
     private void Awake() {
         name = "Nasim";
     }
@@ -28,8 +23,6 @@ public class PersonBook : Talktome
     new void Start()
     {
         base.Start();
-        //BC
-        bc = GetComponent<BackgroundChatter>();
         //DIALOG
         Dialog = Dialogbox.Dialogsystem.gameObject;
         Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = ReturnedBook };
@@ -48,7 +41,6 @@ public class PersonBook : Talktome
     private new void FixedUpdate()
     {
         base.FixedUpdate();
-        //BC
         if (!started && myTime > Startwalkingafter) {
             pm.StartWalking(PathA);
             started = true;

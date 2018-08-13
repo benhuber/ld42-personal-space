@@ -19,8 +19,7 @@ public class PersonFriend1 : Talktome {
     PersonMotor pm;
 
     public float timepertalk = 60f;
-    float time = 0f;
-    bool cakefalg = false;
+
     int behavior = 0;
 
     Annoying annoy;
@@ -50,7 +49,6 @@ public class PersonFriend1 : Talktome {
         dt = new Dialogbox.Dialogtransition[1];
         dt[0] = dt0;
 
-        time = timepertalk;
         annoy = GetComponent<Annoying>();
 
         //PATHFINDING
@@ -108,7 +106,6 @@ public class PersonFriend1 : Talktome {
             ds[1] = Dend;
             dt = new Dialogbox.Dialogtransition[1];
             dt[0] = dt0;
-            cakefalg = true;
         }
 
     }
