@@ -129,7 +129,10 @@ public class PersonFriend1 : Talktome {
             PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo++;
             MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/3 frieds met");
         }
+        MessageHandler.me.EnqueMessage("Archievement 'There will be Cake': Youshared the Cake with Rosie.");
+
         FindObjectOfType<PersistentDataComponent>().CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_ThereWillBeCake);
+
     }
 
 
