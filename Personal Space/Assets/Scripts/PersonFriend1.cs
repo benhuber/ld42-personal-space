@@ -119,7 +119,7 @@ public class PersonFriend1 : Talktome {
         {
             talked = true;
             PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo++;
-            MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/5 frieds met");
+            MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/3 frieds met");
         }
     }
 
