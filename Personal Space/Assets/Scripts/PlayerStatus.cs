@@ -38,8 +38,8 @@ public class PlayerStatus : MonoBehaviour {
         {
             Annoying a = p.GetComponent<Annoying>();
             if (a == null) continue;
-            ChangeAnnoyance((radius-Mathf.Min(Vector2.Distance(p.transform.position, transform.position),radius))*a.value);
-            calmSince = Time.time;
+            float change = ((radius - Mathf.Min(Vector2.Distance(p.transform.position, transform.position), radius)) * a.value);
+            ChangeAnnoyance(change);
         }
 
         if (annoyance > 1) {
@@ -55,6 +55,9 @@ public class PlayerStatus : MonoBehaviour {
     public void ChangeAnnoyance (float ann)
     {
         annoyance += ann;
+
+        if(ann>0) calmSince = Time.time;
+
         if (annoyance >300 && !devmode)
         {
             PLACEHOLDER_DATA.data.ending = PLACEHOLDER_DATA.Endings.Stress;
