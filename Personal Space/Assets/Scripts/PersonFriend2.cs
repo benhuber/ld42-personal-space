@@ -94,6 +94,7 @@ public class PersonFriend2 : Talktome{
         {
             changedDialog = true;
             Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
+            Dialogbox.Dialogstate DendP = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
             Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Jill", Message = "Did you see that? One of Rosie's housemates is actually keeping a bird in a cage. It didn't look very happy. And it has to share the flat with a cat, too.", optionA = "Yeah, that seems stressful for the bird. They probably keep the door to that room shut, normally.", optionB = "Actually, I just let the canary out of the window.", oA_changeval = 0, oB_changeval = 0, end = false };
             Dialogbox.Dialogstate ds1 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Jill",
                 Message = "Are you serious? You are my hero!",
@@ -170,6 +171,11 @@ public class PersonFriend2 : Talktome{
             PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo++;
             MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/3 frieds met");
         }
+    }
+
+    void PersistenceArchieve()
+    {
+
     }
 
 
