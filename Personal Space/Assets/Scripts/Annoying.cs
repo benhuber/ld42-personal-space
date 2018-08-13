@@ -19,7 +19,7 @@ public class Annoying : MonoBehaviour {
         if (setColorBasedOnValue && sr != null) {
             if (value < 1f) {
                 value = 0;
-                sr.color = Color.gray;   
+                sr.color = Color.white;
             } else {
                 sr.color = Color.red;
             }

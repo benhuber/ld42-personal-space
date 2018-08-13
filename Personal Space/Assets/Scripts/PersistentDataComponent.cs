@@ -26,6 +26,7 @@ public class PersistentDataComponent : MonoBehaviour {
 		EAchievement_Prosocial, // ?
 		EAchievement_FancyDancer, // ?
 		EAchievement_NumberOfAchievement,
+		EAchievement_CatPerson,
 		EAchievement_None
 	}
     public EEndings currentEnding = EEndings.EEndings_None;
