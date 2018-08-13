@@ -20,7 +20,7 @@ public class PersonFriend2 : Talktome{
     public float timepertalk = 60f;
     float time = 0f;
     bool cakefalg = false;
-    int behavior = 0;
+    public int behavior = 0;
 
     Annoying annoy;
 
@@ -64,22 +64,22 @@ public class PersonFriend2 : Talktome{
 
     public void NextBehavior()
     {
-
-        if (myTime < 135 && !(behavior == 1)) //BEHAVIOR 1
+        if (behavior == 3) return;
+        if (behavior == 0) //BEHAVIOR 1
         {
             behavior = 1;
             bc.Display("enthusiastic chat \nabout cake", col, 3f, friendclips[0], NextBehavior);
             annoy.value = 0f;
             return;
         }
-        if (myTime < 180 && !(behavior == 2)) //BEHAVIOR 2
+        if (behavior == 1) //BEHAVIOR 2
         {
             behavior = 2;
             pm.StartWalking(PathA, NextBehavior);
             annoy.value = 0f;
             return;
         }
-        if (myTime < 285 && !(behavior == 3)) //BEHAVIOR 3
+        if (behavior == 2) //BEHAVIOR 3
         {
             behavior = 3;
             bc.Display("debate about animal rights", col, 3f, friendclips[1], NextBehavior);
@@ -90,11 +90,11 @@ public class PersonFriend2 : Talktome{
 
     new void FixedUpdate()
     {
-        if (PlayerStatus.thePlayer.freedBird && !changedDialog)
+        if (!changedDialog && PlayerStatus.thePlayer.freedBird)
         {
             changedDialog = true;
             Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
-            Dialogbox.Dialogstate DendP = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
+            Dialogbox.Dialogstate DendP = new Dialogbox.Dialogstate { end = true, callback = PersistenceArchieve };
             Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Jill", Message = "Did you see that? One of Rosie's housemates is actually keeping a bird in a cage. It didn't look very happy. And it has to share the flat with a cat, too.", optionA = "Yeah, that seems stressful for the bird. They probably keep the door to that room shut, normally.", optionB = "Actually, I just let the canary out of the window.", oA_changeval = 0, oB_changeval = 0, end = false };
             Dialogbox.Dialogstate ds1 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Jill",
                 Message = "Are you serious? You are my hero!",
@@ -152,7 +152,7 @@ public class PersonFriend2 : Talktome{
             Dialogbox.Dialogtransition dt2 = new Dialogbox.Dialogtransition { origial = ds3, oA_followup = Dend, oB_followup = ds4 };
             Dialogbox.Dialogtransition dt4 = new Dialogbox.Dialogtransition { origial = ds4, oA_followup = Dend, oB_followup = ds5 };
             Dialogbox.Dialogtransition dt5 = new Dialogbox.Dialogtransition { origial = ds5, oA_followup = ds6, oB_followup = Dend };
-            Dialogbox.Dialogtransition dt6 = new Dialogbox.Dialogtransition { origial = ds6, oA_followup = Dend, oB_followup = Dend };
+            Dialogbox.Dialogtransition dt6 = new Dialogbox.Dialogtransition { origial = ds6, oA_followup = DendP, oB_followup = Dend };
 
 
             ds = new Dialogbox.Dialogstate[2];
@@ -175,7 +175,8 @@ public class PersonFriend2 : Talktome{
 
     void PersistenceArchieve()
     {
-
+        talkedToFriend();
+        //TODO 
     }
 
 

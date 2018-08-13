@@ -12,7 +12,8 @@ public class PersistentDataComponent : MonoBehaviour {
 		EEndings_Stay,
 		EEndings_Stress,
 		EEndings_Time,
-		EEndings_NumberOfEndings
+		EEndings_NumberOfEndings,
+		EEndings_None
 	}
 
 	public enum EAchievement
@@ -21,13 +22,15 @@ public class PersistentDataComponent : MonoBehaviour {
 		EAchievement_FreeLikeABird,
 		EAchievement_ThereWillBeCake,
 		EAchievement_Bookclub,
+		EAchievement_Persistant,
 		EAchievement_Prosocial, // ?
 		EAchievement_FancyDancer, // ?
-		EAchievement_NumberOfAchievement
+		EAchievement_NumberOfAchievement,
+		EAchievement_None
 	}
 
 	private	bool[] endingsCompleted = new bool[(int)EEndings.EEndings_NumberOfEndings];
-	private	bool[] achievementsCompleted = new bool[(int)EEndings.EEndings_NumberOfEndings];
+	private	bool[] achievementsCompleted = new bool[(int)EAchievement.EAchievement_NumberOfAchievement];
 
 	private static bool created = false;
 	
