@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 1085414001065288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8.47, y: -0.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4880937164092772}
   m_Father: {fileID: 0}
@@ -269,7 +269,7 @@ MonoBehaviour:
   peopleLayer:
     serializedVersion: 2
     m_Bits: 256
-  walkSpeed: 1
+  walkSpeed: 2
   blaBlaClips:
   - {fileID: 8300000, guid: d20b09b09998748258be92980bcf356f, type: 3}
   - {fileID: 8300000, guid: 0a05373c848084b948ec1eba3b003a24, type: 3}

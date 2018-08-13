@@ -23,6 +23,7 @@ public class CrowdMovement : MonoBehaviour {
     List<Vector3> walkPath = new List<Vector3>();
     float annoyance = 0f;
     
+    bool dontTalk = false;
     float talkUntil = 0f;
     Transform talkPartner;
 
@@ -130,21 +131,23 @@ public class CrowdMovement : MonoBehaviour {
         if (currentState == State.WALKING || currentState == State.WALKING_TO_DANCEFLOOR) {
             Collider2D[] personalSpaceColliders = Physics2D.OverlapCircleAll(transform.position, personalSpaceRadius, peopleLayer);
             annoyance = Mathf.Lerp(annoyance, personalSpaceColliders.Length, 0.1f);
-            var direction = (targetPosition - transform.position).normalized;
-            Vector3 directionChanges = new Vector3();
+            Vector2 direction = targetPosition - transform.position;
+            direction.Normalize();
+            Vector2 directionChanges = new Vector2();
             foreach (var c in personalSpaceColliders) {
                 if (c.gameObject == this.gameObject) continue;
-                var directionToPerson = (c.transform.position - transform.position).normalized;
+                Vector2 directionToPerson = c.transform.position - transform.position;
+                directionToPerson.Normalize();
                 float distance = (c.transform.position - transform.position).magnitude - 1f;
                 float intensity = (personalSpaceRadius - distance) * 2f / (annoyance + 1);
                 // Debug.Log(distance + " " + annoyance);
-                float dotP = Vector3.Dot(direction, directionToPerson);
+                float dotP = Vector2.Dot(direction, directionToPerson);
                 if (dotP < 0) continue;
                 var commonComponent = dotP * directionToPerson;
                 var normal = direction - commonComponent;
                 normal.Normalize();
                 if (commonComponent.magnitude > 0.95f) {
-                    normal = new Vector3(directionToPerson.y, -directionToPerson.x, 0);
+                    normal = new Vector2(directionToPerson.y, -directionToPerson.x);
                 }
                 directionChanges += intensity * normal; // - intensity * commonComponent;
             }
@@ -174,7 +177,8 @@ public class CrowdMovement : MonoBehaviour {
                 }
                 if (Random.Range(0f,1f) < danceAfinity) {
                     // go dancing
-                    FindPathTo(PointOfInterest.GetPoIWithTag("dancefloor")[0]);
+                    var poi = PointOfInterest.GetPoIWithTag("dancefloor")[0];
+                    FindPathTo(poi.transform.position, poi.myRoom);
                     currentState = State.WALKING_TO_DANCEFLOOR;
                     nextStateChange = float.PositiveInfinity;
                 } else {
@@ -182,7 +186,8 @@ public class CrowdMovement : MonoBehaviour {
                     var pois = PointOfInterest.poi.Where(x => !x.tags.Contains("dancefloor")).ToList();
                     //pois = pois.OrderBy(x => x.transform.position - transform.position).ToList(); BROKE UNITY; THEREFORE TEMP REPLACED BY NEXT LINE (cannot compare Vector3)
                     pois = pois.OrderBy(x => (x.transform.position - transform.position).magnitude).ToList();
-                    FindPathTo(pois[Random.Range(0, Mathf.Min(pois.Count, 3))]);
+                    var poi = pois[Random.Range(0, Mathf.Min(pois.Count, 3))];
+                    FindPathTo(poi.transform.position, poi.myRoom);
                     currentState = State.WALKING;
                     nextStateChange = float.PositiveInfinity;
                 }
@@ -216,23 +221,35 @@ public class CrowdMovement : MonoBehaviour {
         }
     }
 
-    void FindPathTo(PointOfInterest poi) {
+    public void ForceWalkTo(Vector3 pos, Room r = null) {
+        FindPathTo(pos, r);
+        currentState = State.WALKING;
+        nextStateChange = float.PositiveInfinity;
+        nextStateChange = float.PositiveInfinity;
+        dontTalk = true;
+    }
+
+    void FindPathTo(Vector3 pos, Room r = null) {
         walkPath.Clear();
         var currentRoom = PathManager.manager.GetMyRoom(transform.position);
+        if (r == null) {
+            r = PathManager.manager.GetMyRoom(pos);
+        }
         if (currentRoom == null) {
-            Debug.LogError("I don't know where I am!!!!");
-            targetPosition = poi.transform.position;
-        } else if (currentRoom == poi.myRoom) {
-            targetPosition = poi.transform.position;
+            //Debug.LogError("I don't know where I am!!!!");
+            targetPosition = transform.position;
+            return;
+        } else if (currentRoom == r) {
+            targetPosition = pos;
         } else {
-            var roomTransitions = PathManager.manager.GetPathFromAToB(currentRoom, poi.myRoom);
+            var roomTransitions = PathManager.manager.GetPathFromAToB(currentRoom, r);
             if (roomTransitions == null) {
-                Debug.LogError("could not find a path from " + currentRoom.RoomName + " to " + poi.myRoom.RoomName);
+                Debug.LogError("could not find a path from " + currentRoom.RoomName + " to " + r.RoomName);
                 targetPosition = transform.position;
                 return;
             }
             walkPath = roomTransitions;
-            walkPath.Add(poi.transform.position);
+            walkPath.Add(pos);
             targetPosition = transform.position;
         }
         CheckWalkingDone();
@@ -241,6 +258,7 @@ public class CrowdMovement : MonoBehaviour {
     bool CheckWalkingDone() {
         if ((transform.position - targetPosition).magnitude < 1f) {
             if (walkPath.Count == 0) {
+                dontTalk = false;
                 return true;
             }
             targetPosition = walkPath[0];
@@ -249,7 +267,7 @@ public class CrowdMovement : MonoBehaviour {
         return false;
     }
 
-    void Wait() {
+    public void Wait() {
         currentState = State.WAITING;
         nextStateChange = myTime + Random.Range(0f, maxWaitTime);
     }
@@ -278,7 +296,7 @@ public class CrowdMovement : MonoBehaviour {
     }
 
     public bool freeToTalk() {
-        return (currentState == State.WAITING || currentState == State.WALKING);
+        return (currentState == State.WAITING || currentState == State.WALKING) && !dontTalk;
     }
 
     public void GetSpokenTo(float duration, Transform other) {
