@@ -4630,7 +4630,7 @@ MonoBehaviour:
   instigatesDialog: 0
   resets: 1
   resettime: 10
-  name: this person
+  name: Nasim
   Dialog: {fileID: 0}
   Lplayer:
     serializedVersion: 2
@@ -27989,43 +27989,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 4133415964594704, guid: 177d126013a63e34e81f9ab2e9243ad8, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.354933
-      objectReference: {fileID: 0}
-    - target: {fileID: 4133415964594704, guid: 177d126013a63e34e81f9ab2e9243ad8, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: -0.93489176
-      objectReference: {fileID: 0}
-    - target: {fileID: 4133415964594704, guid: 177d126013a63e34e81f9ab2e9243ad8, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 318.421
-      objectReference: {fileID: 0}
-    - target: {fileID: 58118810904946502, guid: 177d126013a63e34e81f9ab2e9243ad8,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 212911086359693236, guid: 177d126013a63e34e81f9ab2e9243ad8,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212911086359693236, guid: 177d126013a63e34e81f9ab2e9243ad8,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212911086359693236, guid: 177d126013a63e34e81f9ab2e9243ad8,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114266847334567900, guid: 177d126013a63e34e81f9ab2e9243ad8,
-        type: 2}
-      propertyPath: instigatesDialog
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 177d126013a63e34e81f9ab2e9243ad8, type: 2}
   m_IsPrefabAsset: 0
@@ -46338,19 +46301,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 50689388006967856, guid: 0c6a070388f62eb4fb0a759d3db7d4f4,
-        type: 2}
-      propertyPath: m_BodyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114764426455819604, guid: 0c6a070388f62eb4fb0a759d3db7d4f4,
-        type: 2}
-      propertyPath: Portrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 5f0328cc51ab41642ac84fdc368c0cd6,
-        type: 3}
-    m_RemovedComponents:
-    - {fileID: 114400695082353916, guid: 0c6a070388f62eb4fb0a759d3db7d4f4, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c6a070388f62eb4fb0a759d3db7d4f4, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1361141416
@@ -50595,7 +50546,7 @@ Prefab:
     - target: {fileID: 114146493203615466, guid: 0dfe6d4250c25aa43a78fcb239189f4c,
         type: 2}
       propertyPath: name
-      value: Mr. Mew
+      value: Miss Mr. Mew
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dfe6d4250c25aa43a78fcb239189f4c, type: 2}
@@ -52160,7 +52111,7 @@ MonoBehaviour:
   instigatesDialog: 0
   resets: 1
   resettime: 0.1
-  name: this person
+  name: Rosie
   Dialog: {fileID: 0}
   Lplayer:
     serializedVersion: 2
@@ -65357,7 +65308,7 @@ MonoBehaviour:
   instigatesDialog: 0
   resets: 1
   resettime: 0.1
-  name: this person
+  name: Owen
   Dialog: {fileID: 0}
   Lplayer:
     serializedVersion: 2
