@@ -27,12 +27,6 @@ public class stressbar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         minloc = resolutioninfo.rect.width;
-
-
-        Debug.Log("pos: " + rt.position.x);
-        Debug.Log("rect: " + rt.rect.width);
-        Debug.Log("pos + rect: " + rt.position.x  + rt.rect.width);
-
         float a = PlayerStatus.thePlayer.annoyance;
         d = (minloc - maxloc) / maxval * a;
         rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, d);
