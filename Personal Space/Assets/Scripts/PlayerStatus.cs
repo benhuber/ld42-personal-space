@@ -39,14 +39,21 @@ public class PlayerStatus : MonoBehaviour {
         {
             Annoying a = p.GetComponent<Annoying>();
             if (a == null) continue;
-            float change = ((radius - Mathf.Min(Vector2.Distance(p.transform.position, transform.position), radius)) * a.value);
+            float change = ((radius - Mathf.Min(Vector2.Distance(p.transform.position, transform.position), radius)) * a.value / 2f);
             ChangeAnnoyance(change);
         }
 
+        float recovery = 1f;
         if (annoyance > 1) {
-            if (calmSince + 4f < Time.time) ChangeAnnoyance(-.6f);
-            else if (calmSince + 2f < Time.time) ChangeAnnoyance(-.4f);
-            else if (calmSince + 1f < Time.time) ChangeAnnoyance(-.2f);
+            if (calmSince + 4f < Time.time) recovery = 1f;
+            else if (calmSince + 2f < Time.time) recovery = .5f;
+            else if (calmSince + 1f < Time.time) recovery = .25f;
+
+            if (annoyance < 200) {
+                recovery *= .5f;
+            }
+
+            ChangeAnnoyance(-recovery * .5f);
         }
         
         Sannoyance.value = annoyance;
@@ -65,9 +72,7 @@ public class PlayerStatus : MonoBehaviour {
             PersonSafe.safe.TriggerEnd();
         }
 
-        if (annoyance > 300) annoyance = 300;
-        if (annoyance < 0) annoyance = 0;
-
+        annoyance = Mathf.Clamp(annoyance, 0f, 300f);
     }
 
     private void OnDrawGizmos()
