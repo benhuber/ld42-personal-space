@@ -9,7 +9,7 @@ public class PersistentDataComponent : MonoBehaviour {
 	{
 		EEndings_Default,
 		EEndings_AllFriendsDone,
-		EEndings_Stay,
+		EEndings_Stay,//
 		EEndings_Stress,
 		EEndings_Time,
 		EEndings_NumberOfEndings,
@@ -26,8 +26,10 @@ public class PersistentDataComponent : MonoBehaviour {
 		EAchievement_Prosocial, // ?
 		EAchievement_FancyDancer, // ?
 		EAchievement_NumberOfAchievement,
+		EAchievement_CatPerson,
 		EAchievement_None
 	}
+    public EEndings currentEnding = EEndings.EEndings_None;
 
 	private	bool[] endingsCompleted = new bool[(int)EEndings.EEndings_NumberOfEndings];
 	private	bool[] achievementsCompleted = new bool[(int)EAchievement.EAchievement_NumberOfAchievement];
