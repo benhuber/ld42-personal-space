@@ -245,9 +245,9 @@ MonoBehaviour:
   talkradius: 0.6
   myTime: 0
   friendclips:
-  - {fileID: 8300000, guid: c3499dc18f4c1f547bd85d372149a6f6, type: 3}
-  - {fileID: 8300000, guid: c3499dc18f4c1f547bd85d372149a6f6, type: 3}
-  Portrait: {fileID: 0}
+  - {fileID: 8300000, guid: b7854a96795c44cd1ac34e27e01ec586, type: 3}
+  - {fileID: 8300000, guid: 7757915cd2e544535a5f2afc00b2eac0, type: 3}
+  Portrait: {fileID: 21300000, guid: b927161b57706bd4f8c4041b98c75bae, type: 3}
   PathA:
   - {fileID: 0}
   - {fileID: 0}
