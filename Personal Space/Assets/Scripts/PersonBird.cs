@@ -31,7 +31,7 @@ public class PersonBird : Talktome {
             oB_changeval = 0f,
             end = false,
         };
-        Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend2, oB_followup = Dend };
+        Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend, oB_followup = Dend2 };
         ds = new Dialogbox.Dialogstate[2];
         ds[0] = ds0;
         ds[1] = Dend;
