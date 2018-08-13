@@ -46,7 +46,10 @@ public class Talktome : MonoBehaviour {
 
     public void FixedUpdate () {
         myTime += Time.fixedDeltaTime;
-        if (Time.fixedTime > doneuntill && resets) done = false;
+        if (Time.fixedTime > doneuntill && resets) {
+            done = false;
+            RegisterIfNeeded();
+        }
     }
 
 
