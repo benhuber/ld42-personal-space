@@ -19707,7 +19707,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1728617395832460, guid: fdad598584d274eb5b6a53aba70253f2, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdad598584d274eb5b6a53aba70253f2, type: 2}
@@ -24664,7 +24664,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.5
+  orthographic size: 8.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -62297,7 +62297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0186fb59a1399c49a1635591f3e488d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3.5
 --- !u!114 &1984234564
 MonoBehaviour:
   m_ObjectHideFlags: 0
