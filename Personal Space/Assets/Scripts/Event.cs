@@ -46,7 +46,7 @@ public class Event : MonoBehaviour {
 
         if (1 - scene.transform.localScale.x < .05 && !extended) {
             extended = true;
-            PlayerStatus.thePlayer.annoyance += stressChange;
+            PlayerStatus.thePlayer.ChangeAnnoyance(stressChange);
             growing = false;
         }
         if (scene.transform.localScale.x < .1 && !shrunk)

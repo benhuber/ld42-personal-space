@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oneShot: 0
+  stressChange: 25
   speed: 1.3
   amplitude: 0.3
   player:

@@ -4588,6 +4588,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   talkradius: 0.6
+  done: 0
   myTime: 0
   Portrait: {fileID: 21300000, guid: 5632e1b7ff0fbbf4dadd6f8ad6ef182e, type: 3}
   hohoclip: {fileID: 0}
@@ -37733,6 +37734,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   talkradius: 2
+  done: 0
   myTime: 0
   Portrait: {fileID: 21300000, guid: a65d7a1742d02d94b8556c77e805240a, type: 3}
   hohoclip: {fileID: 8300000, guid: c3499dc18f4c1f547bd85d372149a6f6, type: 3}
@@ -52057,6 +52059,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   talkradius: 0.6
+  done: 0
   myTime: 0
   friendclips:
   - {fileID: 8300000, guid: e3b26e7f1d87a407abb44af9cafe5093, type: 3}
@@ -59965,7 +59968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1886206085
 Transform:
   m_ObjectHideFlags: 0
@@ -60391,6 +60394,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4737750302428292, guid: 0fad06a3a675e9e48aa39fca4d0c1aaa, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550180505735338, guid: 0fad06a3a675e9e48aa39fca4d0c1aaa, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -65190,6 +65197,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   talkradius: 0.6
+  done: 0
   myTime: 0
   Portrait: {fileID: 0}
 --- !u!114 &2107836029
