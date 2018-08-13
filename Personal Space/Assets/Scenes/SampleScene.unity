@@ -65316,7 +65316,7 @@ MonoBehaviour:
   talkradius: 0.6
   done: 0
   myTime: 0
-  Portrait: {fileID: 0}
+  Portrait: {fileID: 21300000, guid: 4128bc14513417b4fbe777578c786686, type: 3}
 --- !u!114 &2107836029
 MonoBehaviour:
   m_ObjectHideFlags: 0
