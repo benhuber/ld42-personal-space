@@ -13,6 +13,8 @@ public class MainMenuManager : MonoBehaviour {
 	public GameObject MenuBackground;
 	public GameObject CreditBackground;
 
+	public GameObject creditText;
+
 	public FaderScript fader;
 
 	private bool waitingForLoad = false;
@@ -59,11 +61,13 @@ public class MainMenuManager : MonoBehaviour {
 	{
 		MenuButton.gameObject.SetActive(false);
 		CreditBackground.SetActive(false);
+		creditText.SetActive(false);
 	}
 	void ShowCredit()
 	{
 		MenuButton.gameObject.SetActive(true);
 		CreditBackground.SetActive(true);
+		creditText.SetActive(true);
 	}
 	void HideMenu()
 	{
