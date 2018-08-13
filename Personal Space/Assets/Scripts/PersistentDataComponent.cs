@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PersistentDataComponent : MonoBehaviour {
 
@@ -13,21 +14,28 @@ public class PersistentDataComponent : MonoBehaviour {
 	}
 
 	private	bool[] endingsCompleted = new bool[(int)EEndings.EEndings_NumberOfEndings];
+	private static bool created = false;
 	
-	void awake () {
-		DontDestroyOnLoad(this.gameObject);
+	void Start () {
+		if (!created) {
+            DontDestroyOnLoad(this.gameObject);
+            created = true;
+		}	
+	}
+	
+	void Update () {
+		
 	}
 
-	void Start () {
-		
-	}
-	
-		void Update () {
-		
+	public void CompleteAnEnding(EEndings ending)
+	{
+		Assert.IsTrue((int) ending < (int) EEndings.EEndings_NumberOfEndings);
+		endingsCompleted[(int) ending] = true;
 	}
 
 	public bool IsEndingCompleted(EEndings ending)
 	{
+		Assert.IsTrue((int) ending < (int) EEndings.EEndings_NumberOfEndings);
 		return endingsCompleted[(int) ending];
 	}
 }
