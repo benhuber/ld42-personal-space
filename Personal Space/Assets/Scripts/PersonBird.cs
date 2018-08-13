@@ -25,13 +25,13 @@ public class PersonBird : Talktome {
             Avatar = Portrait,
             Title = "Coco the Canary",
             Message = "Coco is sitting in their cage, seemingly frightend by the loud music.",
-            optionA = "*Open the cage*",
+            optionA = "*Open the cage and the window next to it*",
             optionB = "*walk away*",
             oA_changeval = -10f,
             oB_changeval = 0f,
             end = false,
         };
-        Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend2, oB_followup = Dend };
+        Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend, oB_followup = Dend2 };
         ds = new Dialogbox.Dialogstate[2];
         ds[0] = ds0;
         ds[1] = Dend;
