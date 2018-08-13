@@ -16,10 +16,13 @@ public class Annoying : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (setColorBasedOnValue && sr != null)
-        {
-            Color c = Color.Lerp(Color.cyan, Color.red, value / 2);
-            sr.color = c;
+        if (setColorBasedOnValue && sr != null) {
+            if (value < 1f) {
+                value = 0;
+                sr.color = Color.gray;   
+            } else {
+                sr.color = Color.red;
+            }
         }
     }
 }
