@@ -29,7 +29,7 @@ public class Clock : MonoBehaviour {
     void NightOwl()
     {
         nightowl = true;
-        PLACEHOLDER_DATA.data.NightOwl = true;
+        FindObjectOfType<PersistentDataComponent>().CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_NightOwl);
         MessageHandler.me.EnqueMessage("Archievement 'Night Owl': You stayed at the party longer than expected!");
     }
 }

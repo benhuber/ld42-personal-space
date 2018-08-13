@@ -98,7 +98,8 @@ public class PersonFriend1 : Talktome {
         base.FixedUpdate();
         if (PlayerStatus.thePlayer.foundCake)
         {
-            Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend };
+            done = false;
+            Dialogbox.Dialogstate Dend = new Dialogbox.Dialogstate { end = true, callback = talkedToFriend2 };
             Dialogbox.Dialogstate ds0 = new Dialogbox.Dialogstate { Avatar = Portrait, Title = "Rosie", Message = "\t Happy birthday, Rosie! Have some cake.\n Ohhh, you found the cake! This is so awesome. Thank you, my wonderful friend!", optionA = "*Have some Cake together*", optionB = "", oA_changeval = -50f, oB_changeval = 0f, end = false };
             Dialogbox.Dialogtransition dt0 = new Dialogbox.Dialogtransition { origial = ds0, oA_followup = Dend, oB_followup = Dend };
             ds = new Dialogbox.Dialogstate[2];
@@ -118,6 +119,17 @@ public class PersonFriend1 : Talktome {
             PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo++;
             MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/3 frieds met");
         }
+    }
+
+    void talkedToFriend2()
+    {
+        if (!talked)
+        {
+            talked = true;
+            PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo++;
+            MessageHandler.me.EnqueMessage("Task accomplished: " + PLACEHOLDER_DATA.data.numberOfFriendsSpokenTo + "/3 frieds met");
+        }
+        FindObjectOfType<PersistentDataComponent>().CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_ThereWillBeCake);
     }
 
 

@@ -51,6 +51,9 @@ public class PersonBird : Talktome {
 
             closed.SetActive(false);
             open.SetActive(true);
+
+            MessageHandler.me.EnqueMessage("Archievement 'Animal Liberation': You freed Coco.");
+            FindObjectOfType<PersistentDataComponent>().CompleteAnAchievment(PersistentDataComponent.EAchievement.EAchievement_FreeLikeABird);
         }
     }
 }
