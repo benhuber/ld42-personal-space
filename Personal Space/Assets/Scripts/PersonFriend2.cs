@@ -18,8 +18,6 @@ public class PersonFriend2 : Talktome{
     PersonMotor pm;
 
     public float timepertalk = 60f;
-    float time = 0f;
-    bool cakefalg = false;
     public int behavior = 0;
 
     Annoying annoy;
@@ -51,7 +49,6 @@ public class PersonFriend2 : Talktome{
         dt = new Dialogbox.Dialogtransition[1];
         dt[0] = dt0;
 
-        time = timepertalk;
         annoy = GetComponent<Annoying>();
 
         //PATHFINDING
@@ -155,11 +152,24 @@ public class PersonFriend2 : Talktome{
             Dialogbox.Dialogtransition dt6 = new Dialogbox.Dialogtransition { origial = ds6, oA_followup = DendP, oB_followup = Dend };
 
 
-            ds = new Dialogbox.Dialogstate[2];
+            ds = new Dialogbox.Dialogstate[8];
             ds[0] = ds0;
-            ds[1] = Dend;
-            dt = new Dialogbox.Dialogtransition[1];
+            ds[1] = ds1;
+            ds[2] = ds3;
+            ds[3] = ds4;
+            ds[4] = ds5;
+            ds[5] = ds6;
+            ds[6] = Dend;
+            ds[7] = DendP;
+
+            dt = new Dialogbox.Dialogtransition[6];
             dt[0] = dt0;
+            dt[0] = dt1;
+            dt[0] = dt2;
+            dt[0] = dt4;
+            dt[0] = dt5;
+            dt[0] = dt6;
+
         }
     }
 

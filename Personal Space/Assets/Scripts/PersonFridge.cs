@@ -8,7 +8,6 @@ public class PersonFridge : Talktome {
     PLACEHOLDER_DATA.Endings oldending;
 
     bool talked;
-    Annoying annoy;
 
 
     new void Start()
@@ -38,7 +37,6 @@ public class PersonFridge : Talktome {
         dt = new Dialogbox.Dialogtransition[1];
         dt[0] = dt0;
 
-        annoy = GetComponent<Annoying>();
     }
 
 
