@@ -14,6 +14,7 @@ public class PersonSafe : Talktome {
     void Awake()
     {
         safe = this;
+        name = "Darya";
     }
 
     new void Start()

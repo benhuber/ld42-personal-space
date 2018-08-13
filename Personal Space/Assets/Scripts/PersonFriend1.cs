@@ -22,6 +22,10 @@ public class PersonFriend1 : Talktome {
 
     bool talked = false;
 
+    private void Awake() {
+        name = "Rosie";
+    }
+
     new void Start()
     {
         base.Start();

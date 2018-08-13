@@ -10,7 +10,8 @@ public class Talktome : MonoBehaviour {
     public bool instigatesDialog = true;
     public bool resets = false;
     public float resettime = 10f;
-    bool keypressed;
+
+    public string name = "this person";
 
     [HideInInspector]
     public GameObject Dialog;
@@ -22,42 +23,28 @@ public class Talktome : MonoBehaviour {
     bool done = false;
     float doneuntill;
 
-    tut displayhelper;
-    static List<Talktome> interactive = new List<Talktome>();
     public void Start()
     {
-        displayhelper = tut.me;
+        RegisterIfNeeded();
     }
 
-    private void Update()
-    {
-        keypressed = Input.GetKey(KeyCode.E);
+    void RegisterIfNeeded() {
+        if (!done && !instigatesDialog) {
+            InteractionManager.RegisterInteraction(OnInteract, this.transform, "talk to "+name, 1);
+        }
     }
+
+    void OnInteract() {
+        Dialog.SetActive(true);
+        Dialogbox.Dialogsystem.StartDialog(ds, dt);
+        done = true;
+        InteractionManager.RemoveInteraction(this.transform);
+        doneuntill = Time.fixedTime + resettime;
+    }
+
 
     public void FixedUpdate () {
-        if (Time.fixedTime > doneuntill &&resets) done = false;
-        if (done) return;
-
-        Collider2D player = Physics2D.OverlapCircle(transform.position, talkradius, Lplayer);
-        if (player != null)
-        {
-            if (!instigatesDialog && !keypressed)
-            {
-                displayhelper.interactDisplay.SetActive(true);
-                interactive.Add(this);
-                return;
-            }
-            
-            Dialog.SetActive(true);
-            Dialogbox.Dialogsystem.StartDialog(ds, dt);
-            done = true;
-            doneuntill = Time.fixedTime + resettime;
-        }
-        else
-        {
-            if (interactive.Contains(this)) interactive.Remove(this);
-        }
-        if(interactive.Count == 0) displayhelper.interactDisplay.SetActive(false);
+        if (Time.fixedTime > doneuntill && resets) done = false;
     }
 
 

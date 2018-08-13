@@ -6,6 +6,10 @@ public class PersonA : Talktome
 {
     public Sprite Portrait;
 
+    private void Awake() {
+        name = "the asshat";
+    }
+
     new void Start()
     {
         Dialog = Dialogbox.Dialogsystem.gameObject;

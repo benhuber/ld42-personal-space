@@ -21,6 +21,10 @@ public class PersonBook : Talktome
 
     int i = 0;
 
+    private void Awake() {
+        name = "Nasim";
+    }
+
     new void Start()
     {
         base.Start();

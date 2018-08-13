@@ -39,7 +39,7 @@ public class InteractionManager : MonoBehaviour {
     private void Update() {
         if (Time.time > nextCheck) {
             var nearby = possibleInteractions.Where(x => (x.center.position - PlayerStatus.thePlayer.transform.position).magnitude < interactRadius);
-            nearby = nearby.OrderBy(x => 180 - AngleOfInteraction(x));
+            nearby = nearby.OrderBy(x => AngleOfInteraction(x));
             currentInteraction = null;
             if (nearby.Count() > 0) {
                 var best = nearby.First();
@@ -48,7 +48,7 @@ public class InteractionManager : MonoBehaviour {
                 }
             }
             
-            nextCheck = Time.time + .5f;
+            nextCheck = Time.time + .2f;
         }
 
         if (currentInteraction != null) {
@@ -56,9 +56,12 @@ public class InteractionManager : MonoBehaviour {
             interactionMarker.transform.position = currentInteraction.center.position;
             interactionMarker.transform.localScale = new Vector3(currentInteraction.sizeOfRect, currentInteraction.sizeOfRect, 1f);
             interactionMarker.SetActive(true);
-            if (Time.fixedDeltaTime > 0.1f && Input.GetKey(KeyCode.E)) {
+            if (Time.timeScale > 0.1f && Input.GetKey(KeyCode.E)) {
                 currentInteraction.callback();
             }
+        } else {
+            interactText.text = "";
+            interactionMarker.SetActive(false);
         }
         
     }

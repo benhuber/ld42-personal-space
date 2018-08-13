@@ -21,6 +21,10 @@ public class PersonB : Talktome
     public List<Transform[]> PATHS = new List<Transform[]>();
     int i = 0;
 
+    private void Awake() {
+        name = "the art dealer";
+    }
+
     new void Start()
     {
         base.Start();
